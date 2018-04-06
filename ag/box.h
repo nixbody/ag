@@ -36,7 +36,7 @@ namespace ag
 		box &add(T &&child, const std::function<void (component &)> &setup);
 
 		/* Get style of this box. */
-		inline style_type &style() override;
+		style_type &style() override;
 
 		/* Draw this box with all its children on the screen. */
 		void draw() override;
