@@ -4,7 +4,6 @@
 #include <allegro5/allegro_memfile.h>
 #include <allegro5/allegro_ttf.h>
 #include <map>
-#include <memory>
 #include <utility>
 
 namespace ag
@@ -12,20 +11,17 @@ namespace ag
 	font::font(const std::string &resource, const int size)
 	{
 		static std::map<const std::string *, ALLEGRO_FILE *> files;
-		static std::map<
-			std::pair<const std::string *, const int>,
-			std::unique_ptr<ALLEGRO_FONT, decltype(&al_destroy_font)>
-		> fonts;
+		static std::map<std::pair<const std::string *, const int>, const ALLEGRO_FONT *> fonts;
 
 		if (files.find(&resource) == files.end()) {
-			files.insert({&resource, al_open_memfile(const_cast<char *>(resource.data()), resource.size(), "r")});
+			files.try_emplace(&resource, al_open_memfile(const_cast<char *>(resource.data()), resource.size(), "r"));
 		}
 		if (fonts.find({&resource, size}) == fonts.end()) {
 			auto f = al_load_ttf_font_f(files.at(&resource), nullptr, size, 0);
-			fonts.try_emplace(std::make_pair(&resource, size), f, al_destroy_font);
+			fonts.try_emplace({&resource, size}, f);
 		}
 
-		native_handle_ = fonts.at({&resource, size}).get();
+		native_handle_ = fonts.at({&resource, size});
 	}
 
 	font::~font() = default;
@@ -49,7 +45,7 @@ namespace ag
 		}
 
 		al_draw_multiline_text(
-			std::any_cast<ALLEGRO_FONT *>(native_handle_),
+			std::any_cast<const ALLEGRO_FONT *>(native_handle_),
 			al_map_rgba(color.r, color.g, color.b, color.a),
 			x,
 			y,
