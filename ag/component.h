@@ -3,6 +3,7 @@
 #include "border.h"
 #include "color.h"
 #include "insets.h"
+#include "theme.h"
 
 #include <functional>
 #include <optional>
@@ -55,6 +56,9 @@ namespace ag
 
 			/* Padding. */
 			prop<insets> padding{0.0f};
+
+			/* Text font. */
+			prop<font> text_font{get_theme().text_font()};
 		};
 
 		/* Destructor. */

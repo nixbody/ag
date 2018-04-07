@@ -1,7 +1,6 @@
 #pragma once
 
 #include "component.h"
-#include "theme.h"
 
 #include <functional>
 #include <optional>
@@ -19,10 +18,7 @@ namespace ag
 
 		/* Box style. */
 		struct style_type : component::style_type
-		{
-			/* Font for items inside this box. */
-			prop<font> font{get_theme().font};
-		};
+		{};
 
 		/* Destructor. */
 		~box() override;
