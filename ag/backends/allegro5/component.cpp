@@ -13,7 +13,7 @@ namespace ag
 		const auto &bc = s.bg_color();
 		const auto &b = s.border();
 
-		if (b.thickness > 0) {
+		if (b.color.a > 0 && b.thickness > 0) {
 			al_draw_rounded_rectangle(
 				x + (b.thickness * 0.5f),
 				y + (b.thickness * 0.5f),
@@ -26,9 +26,11 @@ namespace ag
 			);
 		}
 
-		al_draw_filled_rounded_rectangle(
-			x + b.thickness, y + b.thickness, w - b.thickness, h - b.thickness, r, r, al_map_rgba(bc.r, bc.g, bc.b, bc.a)
-		);
+		if (bc.a > 0) {
+			al_draw_filled_rounded_rectangle(
+				x + b.thickness, y + b.thickness, w - b.thickness, h - b.thickness, r, r, al_map_rgba(bc.r, bc.g, bc.b, bc.a)
+			);
+		}
 	}
 
 	const std::optional<component::parent_ref> &component::parent() const
