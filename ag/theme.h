@@ -2,7 +2,7 @@
 
 #include "font.h"
 
-#include <optional>
+#include <cstdlib>
 #include <utility>
 
 namespace ag
@@ -11,27 +11,32 @@ namespace ag
 	struct theme
 	{
 		template <typename T>
-		friend void set_theme(T &&theme)
-		{
-			theme::current_ = std::forward<T>(theme);
-		}
+		friend void set_theme(T &&theme);
+		friend const theme &get_theme();
 
-		friend const theme &get_theme()
-		{
-			return *theme::current_;
-		}
+		/* Destructor. */
+		virtual ~theme() = default;
 
 		/* Text font. */
-		const font font;
+		virtual font text_font() const = 0;
 
 	private:
 		/* Currently set theme. */
-		static std::optional<theme> current_;
+		static const theme *current_;
 	};
 
 	/* Set the given theme. */
 	template <typename T>
-	void set_theme(T &&theme);
+	void set_theme(T &&theme)
+	{
+		if (!theme::current_) {
+			delete theme::current_;
+		} else {
+			std::atexit([] { delete theme::current_; });
+		}
+
+		theme::current_ = new T{std::forward<T>(theme)};
+	}
 
 	/* Get currently set theme. */
 	const theme &get_theme();
