@@ -4,21 +4,18 @@
 #include <allegro5/allegro_memfile.h>
 #include <allegro5/allegro_ttf.h>
 #include <map>
-#include <utility>
 
 namespace ag
 {
 	font::font(const std::string &resource, const int size)
 	{
-		static std::map<const std::string *, ALLEGRO_FILE *> files;
-		static std::map<std::pair<const std::string *, const int>, const ALLEGRO_FONT *> fonts;
+		static std::map<std::pair<const std::string *const, const int>, const ALLEGRO_FONT *const> fonts;
 
-		if (files.find(&resource) == files.end()) {
-			files.try_emplace(&resource, al_open_memfile(const_cast<char *>(resource.data()), resource.size(), "r"));
-		}
 		if (fonts.find({&resource, size}) == fonts.end()) {
-			auto f = al_load_ttf_font_f(files.at(&resource), nullptr, size, 0);
-			fonts.try_emplace({&resource, size}, f);
+			fonts.try_emplace(
+				{&resource, size},
+				al_load_ttf_font_f(al_open_memfile(const_cast<char *>(resource.data()), resource.size(), "r"), nullptr, size, 0)
+			);
 		}
 
 		native_handle_ = fonts.at({&resource, size});
