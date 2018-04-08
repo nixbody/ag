@@ -1,7 +1,6 @@
 #pragma once
 
 #include "border.h"
-#include "color.h"
 #include "insets.h"
 #include "theme.h"
 
@@ -59,6 +58,15 @@ namespace ag
 
 			/* Text font. */
 			prop<font> text_font{get_theme().text_font()};
+
+			/* Text color. */
+			prop<color> text_color{get_theme().text_color()};
+
+			/* Text alignment. */
+			prop<font::alignment> text_align{font::alignment::left};
+
+			/* Line height. */
+			prop<float> line_height{get_theme().line_height()};
 		};
 
 		/* Destructor. */

@@ -42,10 +42,14 @@ namespace ag
 
 	void box::child_added(component &child)
 	{
-		child.style().x = [this] { return style().x() + style().padding().right + style().border().thickness; };
-		child.style().y = [this] { return style().y() + style().padding().top + style().border().thickness; };
-		child.style().width = [this] { return style().width() - style().padding().left - style().border().thickness; };
-		child.style().height = [this] { return style().height() - style().padding().bottom - style().border().thickness; };
-		child.style().text_font = [this] { return style().text_font(); };
+		auto &cs = child.style();
+		cs.x = [this] { auto &s = style(); return s.x() + s.padding().right + s.border().thickness; };
+		cs.y = [this] { auto &s = style(); return s.y() + s.padding().top + s.border().thickness; };
+		cs.width = [this] { auto &s = style(); return s.width() - s.padding().left - s.border().thickness; };
+		cs.height = [this] { auto &s = style(); return s.height() - s.padding().bottom - s.border().thickness; };
+		cs.text_font = [this] { return style().text_font(); };
+		cs.text_color = [this] { return style().text_color(); };
+		cs.text_align = [this] { return style().text_align(); };
+		cs.line_height = [this] { return style().line_height(); };
 	}
 }

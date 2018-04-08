@@ -1,5 +1,6 @@
 #pragma once
 
+#include "color.h"
 #include "font.h"
 
 #include <cstdlib>
@@ -19,6 +20,12 @@ namespace ag
 
 		/* Text font. */
 		virtual font text_font() const = 0;
+
+		/* Text color. */
+		virtual color text_color() const = 0;
+
+		/* Line height. */
+		virtual float line_height() const = 0;
 
 	private:
 		/* Currently set theme. */
