@@ -75,17 +75,20 @@ namespace ag
 		/* Get this component's style. */
 		virtual style_type &style() = 0;
 
+		/* Get this component's style. */
+		virtual const style_type &style() const = 0;
+
 		/* Draw this component on the screen. */
-		virtual void draw();
+		virtual void draw() const;
 
 		/* Get parent of this component. */
 		const std::optional<parent_ref> &parent() const;
 
 		/* Get width of this component. */
-		float width();
+		float width() const;
 
 		/* Get height of this component. */
-		float height();
+		float height() const;
 
 		/* Hide this component. */
 		component &hide();

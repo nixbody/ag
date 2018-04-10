@@ -2,7 +2,6 @@
 
 #include "component.h"
 
-#include <functional>
 #include <optional>
 #include <utility>
 #include <vector>
@@ -18,7 +17,21 @@ namespace ag
 
 		/* Box style. */
 		struct style_type : component::style_type
-		{};
+		{
+			/* Children alignment. */
+			enum class alignment {
+				top_left, top_center, top_right, center_left, center, center_right, bottom_left, bottom_center, bottom_right
+			};
+
+			/* Children alignment. */
+			prop<alignment> align{alignment::top_left};
+
+			/* Whether or not box should adjust its children width. */
+			prop<bool> adjust_children_width{true};
+
+			/* Whether or not box should adjust its children height. */
+			prop<bool> adjust_children_height{true};
+		};
 
 		/* Destructor. */
 		~box() override;
@@ -28,16 +41,19 @@ namespace ag
 		box &add(T &&child);
 
 		/* Add the given component into this box. */
-		template <typename T>
-		box &add(T &&child, const std::function<void (component &)> &setup);
+		template <typename T, typename Function>
+		box &add(T &&child, const Function &setup);
 
 		/* Get style of this box. */
 		style_type &style() override;
 
-		/* Draw this box with all its children on the screen. */
-		void draw() override;
+		/* Get style of this box. */
+		const style_type &style() const override;
 
-		/* Get topmost child at the given position. */
+		/* Draw this box with all its children on the screen. */
+		void draw() const override;
+
+		/* Get topmost visible child at the given position. */
 		std::optional<child_ref> child_at_pos(const float x, const float y) const;
 
 	protected:
@@ -50,6 +66,18 @@ namespace ag
 
 		/* Components inside this box. */
 		std::vector<component *> children_;
+
+		/* Get X coordinate of the given child. */
+		virtual float child_x(const component &child) const;
+
+		/* Get Y coordinate of the given child. */
+		virtual float child_y(const component &child) const;
+
+		/* Get width of the given child. */
+		virtual float child_width(const component &child) const;
+
+		/* Get height of the given child. */
+		virtual float child_height(const component &child) const;
 	};
 
 	template <typename T>
@@ -61,10 +89,10 @@ namespace ag
 		return *this;
 	}
 
-	template <typename T>
-	box &box::add(T &&child, const std::function<void (component &)> &setup)
+	template <typename T, typename Function>
+	box &box::add(T &&child, const Function &setup)
 	{
-		setup(*add(std::forward<T>(child)).children_.back());
+		setup(static_cast<T &>(*add(std::forward<T>(child)).children_.back()));
 		return *this;
 	}
 }

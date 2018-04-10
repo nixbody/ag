@@ -30,8 +30,11 @@ namespace ag
 		/* Get style of this label. */
 		style_type &style() override;
 
+		/* Get style of this label. */
+		const style_type &style() const override;
+
 		/* Draw this label. */
-		void draw() override;
+		void draw() const override;
 
 	private:
 		/* This label's text. */
