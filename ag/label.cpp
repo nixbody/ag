@@ -23,17 +23,16 @@ namespace ag
 		if (!s.visible()) return;
 
 		component::draw();
-		float x;
+		const auto p = s.padding();
+		const auto b = s.border();
+		float x = s.x() + p.left + b.thickness, w = s.width() - p.left - p.right - 2.0f * b.thickness;
 
-		switch (s.text_align()) {
-			case font::alignment::left: x = s.x(); break;
-			case font::alignment::center: x = s.x() + s.width() / 2.0f; break;
-			case font::alignment::right: x = s.x() + s.width(); break;
+		const auto a = s.text_align();
+		switch (a) {
+			case font::alignment::center: x += 0.5f * w; break;
+			case font::alignment::right: x += w; break;
 		}
 
-		const auto p = s.padding();
-		s.text_font().draw_text(
-			text_, x + p.left, s.y() + p.top, s.width() - p.right, s.text_color(), s.line_height(), s.text_align()
-		);
+		s.text_font().draw_text(text_, x, s.y() + p.top + b.thickness, w, s.text_color(), s.line_height(), a);
 	}
 }
