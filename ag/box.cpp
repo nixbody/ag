@@ -4,7 +4,7 @@ namespace ag
 {
 	box::~box()
 	{
-		for (const auto *const c : children_) delete c;
+		for (const auto &c : children_) delete &c.get();
 	}
 
 	box::style_type &box::style()
@@ -22,18 +22,20 @@ namespace ag
 		if (!style().visible()) return;
 
 		component::draw();
-		for (auto *const c : children_) c->draw();
+		for (const auto &c : children_) c.get().draw();
 	}
 
 	std::optional<box::child_ref> box::child_at_pos(const float x, const float y) const
 	{
 		component *child = nullptr;
-		for (auto *const c : children_) {
-			const auto &s = c->style();
+		for (const auto &crw : children_) {
+			auto &c = crw.get();
+
+			const auto &s = c.style();
 			const auto v = s.visible();
 			const auto cx = s.x(), cy = s.y(), cw = s.width(), ch = s.height();
 
-			if (const auto *const cb = dynamic_cast<box *>(c)) {
+			if (const auto *const cb = dynamic_cast<const box *>(&c)) {
 				if (const auto &cbc = cb->child_at_pos(x, y)) {
 					child = &cbc->get();
 					continue;
@@ -41,11 +43,16 @@ namespace ag
 			}
 
 			if (v && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
-				child = c;
+				child = &c;
 			}
 		}
 
 		return child ? std::optional<box::child_ref>{*child} : std::optional<box::child_ref>{};
+	}
+
+	const std::vector<box::child_ref> &box::children() const
+	{
+		return children_;
 	}
 
 	void box::child_added(component &child)
