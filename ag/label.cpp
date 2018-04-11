@@ -31,6 +31,9 @@ namespace ag
 			case font::alignment::right: x = s.x() + s.width(); break;
 		}
 
-		s.text_font().draw_text(text_, x, s.y(), s.width(), s.text_color(), s.line_height(), s.text_align());
+		const auto p = s.padding();
+		s.text_font().draw_text(
+			text_, x + p.left, s.y() + p.top, s.width() - p.right, s.text_color(), s.line_height(), s.text_align()
+		);
 	}
 }
