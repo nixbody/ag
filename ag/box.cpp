@@ -109,14 +109,14 @@ namespace ag
 	float box::child_width(const component &child) const
 	{
 		auto &s = style();
-		const auto p = s.padding();
-		return s.width() - p.left - p.right - 2.0f * s.border().thickness;
+		const auto p = s.padding(), cm = child.style().margin();
+		return s.width() - p.left - p.right - cm.left - cm.right - 2.0f * s.border().thickness;
 	}
 
 	float box::child_height(const component &child) const
 	{
 		auto &s = style();
-		const auto p = s.padding();
-		return s.height() - p.top - p.bottom - 2.0f * s.border().thickness;
+		const auto p = s.padding(), cm = child.style().margin();
+		return s.height() - p.top - p.bottom - cm.top - cm.bottom - 2.0f * s.border().thickness;
 	}
 }
