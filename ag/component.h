@@ -31,7 +31,8 @@ namespace ag
 				using std::function<T ()>::function;
 
 				/* Initialize this property with the given value. */
-				prop(T &&value): prop{[v = std::forward<T>(value)] { return v; }}
+				template <typename ... Args>
+				prop(Args && ... args): prop{[v = T(std::forward<Args>(args)...)] { return v; }}
 				{}
 			};
 
