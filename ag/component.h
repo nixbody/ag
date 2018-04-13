@@ -49,13 +49,13 @@ namespace ag
 			prop<float> radius{0.0f};
 			
 			/* Background color. */
-			prop<color> bg_color{color{}};
+			prop<color> bg_color{0, 0, 0, 0};
 
 			/* Margin. */
 			prop<insets> margin{0.0f};
 
 			/* Border. */
-			prop<border> border{::ag::border{}};
+			prop<border> border{0.0f, color{0, 0, 0, 0}};
 
 			/* Padding. */
 			prop<insets> padding{0.0f};

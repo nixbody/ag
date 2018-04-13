@@ -11,9 +11,9 @@ namespace ag
 		const uint8_t r, g, b, a;
 
 		/* Create a new color. */
-		explicit color(const uint32_t value = 0);
+		color(const uint32_t value);
 
 		/* Create a new color. */
-		explicit color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255);
+		color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255);
 	};
 }
