@@ -2,7 +2,6 @@
 
 #include "component.h"
 
-#include <functional>
 #include <optional>
 #include <utility>
 #include <vector>
