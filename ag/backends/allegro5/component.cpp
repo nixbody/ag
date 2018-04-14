@@ -4,39 +4,19 @@
 
 namespace ag
 {
+	component::component(std::string &&label): label_{std::move(label)}
+	{}
+
+	component::component(const std::string &label): label_{label}
+	{}
+
 	void component::draw() const
 	{
-		const auto &s = style();
-		if (!s.visible()) return;
+		if (!style().visible()) return;
 
-		const auto x = s.x(), y = s.y(), w = s.width(), h = s.height(), r = s.radius();
-		const auto bc = s.bg_color();
-		const auto b = s.border();
-
-		if (b.color.a > 0 && b.thickness > 0) {
-			al_draw_rounded_rectangle(
-				x + (b.thickness * 0.5f),
-				y + (b.thickness * 0.5f),
-				x + w - (b.thickness * 0.5f),
-				y + h - (b.thickness * 0.5f),
-				r,
-				r,
-				al_map_rgba(b.color.r, b.color.g, b.color.b, b.color.a),
-				b.thickness
-			);
-		}
-
-		if (bc.a > 0) {
-			al_draw_filled_rounded_rectangle(
-				x + b.thickness,
-				y + b.thickness,
-				x + w - b.thickness,
-				y + h - b.thickness,
-				r,
-				r,
-				al_map_rgba(bc.r, bc.g, bc.b, bc.a)
-			);
-		}
+		draw_border();
+		draw_background();
+		draw_label();
 	}
 
 	const std::optional<component::parent_ref> &component::parent() const
@@ -64,5 +44,78 @@ namespace ag
 	{
 		style().visible = true;
 		return *this;
+	}
+
+	component &component::set_label(std::string &&label)
+	{
+		label_ = std::move(label);
+		return *this;
+	}
+
+	component &component::set_label(const std::string &label)
+	{
+		label_ = label;
+		return *this;
+	}
+
+	const std::string &component::label() const
+	{
+		return label_;
+	}
+
+	void component::draw_border() const
+	{
+		const auto &s = style();
+		const auto b = s.border();
+
+		if (!b.color.a || !b.thickness) return;
+
+		const auto x = s.x(), y = s.y(), r = s.radius();
+		al_draw_rounded_rectangle(
+			x + 0.5f * b.thickness,
+			y + 0.5f * b.thickness,
+			x + s.width() - 0.5f * b.thickness,
+			y + s.height() - 0.5f * b.thickness,
+			r,
+			r,
+			al_map_rgba(b.color.r, b.color.g, b.color.b, b.color.a),
+			b.thickness
+		);
+	}
+
+	void component::draw_background() const
+	{
+		const auto &s = style();
+		const auto bc = s.bg_color();
+
+		if (!bc.a) return;
+
+		const auto x = s.x(), y = s.y(), r = s.radius();
+		const auto b = s.border();
+		al_draw_filled_rounded_rectangle(
+			x + b.thickness,
+			y + b.thickness,
+			x + s.width() - b.thickness,
+			y + s.height() - b.thickness,
+			r,
+			r,
+			al_map_rgba(bc.r, bc.g, bc.b, bc.a)
+		);
+	}
+
+	void component::draw_label() const
+	{
+		const auto &s = style();
+		const auto p = s.padding();
+		const auto b = s.border();
+		float x = s.x() + p.left + b.thickness, w = s.width() - p.left - p.right - 2.0f * b.thickness;
+
+		const auto a = s.text_align();
+		switch (a) {
+			case font::alignment::center: x += 0.5f * w; break;
+			case font::alignment::right: x += w; break;
+		}
+
+		s.text_font().draw_text(label_, x, s.y() + p.top + b.thickness, w, s.text_color(), s.line_height(), a);
 	}
 }

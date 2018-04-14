@@ -6,6 +6,7 @@
 
 #include <functional>
 #include <optional>
+#include <string>
 #include <utility>
 
 namespace ag
@@ -73,6 +74,15 @@ namespace ag
 			prop<float> line_height{get_theme().line_height()};
 		};
 
+		/* Default constructor. */
+		component() = default;
+
+		/* Create a new component and set its label. */
+		component(std::string &&label);
+
+		/* Create a new component and set its label. */
+		component(const std::string &label);
+
 		/* Destructor. */
 		virtual ~component() = default;
 		
@@ -100,8 +110,29 @@ namespace ag
 		/* Show this component. */
 		component &show();
 
+		/* Set this component's label. */
+		component &set_label(std::string &&label);
+
+		/* Set this component's label. */
+		component &set_label(const std::string &label);
+
+		/* Get this component's label. */
+		const std::string &label() const;
+
 	private:
 		/* Parent of this component. */
 		std::optional<parent_ref> parent_;
+
+		/* This component's label. */
+		std::string label_;
+
+		/* Draw this component's border. */
+		inline void draw_border() const;
+
+		/* Draw this component's background. */
+		inline void draw_background() const;
+
+		/* Draw this component's label. */
+		inline void draw_label() const;
 	};
 }

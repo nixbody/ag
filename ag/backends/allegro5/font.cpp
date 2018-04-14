@@ -33,6 +33,8 @@ namespace ag
 		const font::alignment align
 	) const
 	{
+		if (text.empty()) return;
+
 		int flags{0};
 
 		switch (align) {
