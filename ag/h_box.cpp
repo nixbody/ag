@@ -12,8 +12,7 @@ namespace ag
 			const auto cm = cs.margin();
 
 			if (&c.get() == &child) x += content_width + cm.left;
-
-			content_width += cs.width() + cm.left + cm.right;
+			if (cs.visible()) content_width += cs.width() + cm.left + cm.right;
 		}
 
 		switch (s.align()) {
