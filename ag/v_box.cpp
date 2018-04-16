@@ -8,10 +8,11 @@ namespace ag
 		float content_height{0.0f}, y = s.y();
 
 		for (const auto &c : children()) {
-			if (&c.get() == &child) y += content_height;
-
 			const auto &cs = c.get().style();
 			const auto cm = cs.margin();
+
+			if (&c.get() == &child) y += content_height + cm.top;
+
 			content_height += cs.height() + cm.top + cm.bottom;
 		}
 
