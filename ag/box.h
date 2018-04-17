@@ -3,6 +3,7 @@
 #include "component.h"
 
 #include <optional>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -25,12 +26,6 @@ namespace ag
 
 			/* Children alignment. */
 			prop<alignment> align{alignment::top_left};
-
-			/* Whether or not box should adjust its children width. */
-			prop<bool> adjust_children_width{true};
-
-			/* Whether or not box should adjust its children height. */
-			prop<bool> adjust_children_height{true};
 		};
 
 		/* Destructor. */
@@ -86,7 +81,7 @@ namespace ag
 	template <typename T>
 	box &box::add(T &&child)
 	{
-		children_.emplace_back(*(new T{std::forward<T>(child)}));
+		children_.emplace_back(*(new std::decay_t<T>{std::forward<T>(child)}));
 		children_.back().get().parent_ = *this;
 		child_added(children_.back().get());
 		return *this;

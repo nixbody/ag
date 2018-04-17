@@ -7,12 +7,13 @@ namespace ag
 		const auto &s = style();
 		float content_height{0.0f}, y = s.y();
 
-		for (const auto &c : children()) {
-			const auto &cs = c.get().style();
+		for (const auto &crw : children()) {
+			const auto &c = crw.get();
+			const auto &cs = c.style();
 			const auto cm = cs.margin();
 
-			if (&c.get() == &child) y += content_height + cm.top;
-			if (cs.visible()) content_height += cs.height() + cm.top + cm.bottom;
+			if (&c == &child) y += content_height + cm.top;
+			if (!c.hidden()) content_height += cs.height() + cm.top + cm.bottom;
 		}
 
 		switch (s.align()) {

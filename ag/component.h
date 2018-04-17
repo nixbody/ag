@@ -1,8 +1,9 @@
 #pragma once
 
 #include "border.h"
+#include "color.h"
+#include "font.h"
 #include "insets.h"
-#include "theme.h"
 
 #include <functional>
 #include <optional>
@@ -31,20 +32,20 @@ namespace ag
 			{
 				using std::function<T ()>::function;
 
+				/* Initialize this property with no value set. */
+				prop() = default;
+
 				/* Initialize this property with the given value. */
 				template <typename ... Args>
 				prop(Args && ... args): prop{[v = T(std::forward<Args>(args)...)] { return v; }}
 				{}
 			};
 
-			/* Visibility flag. */
-			prop<bool> visible{true};
-
 			/* Position coordinates. */
-			prop<float> x{0.0f}, y{0.0f};
+			prop<float> x, y;
 
 			/* Dimensions. */
-			prop<float> width{0.0f}, height{0.0f};
+			prop<float> width, height;
 
 			/* Corners' radius. */
 			prop<float> radius{0.0f};
@@ -62,16 +63,16 @@ namespace ag
 			prop<insets> padding{0.0f};
 
 			/* Text font. */
-			prop<font> text_font{get_theme().text_font()};
+			prop<font> text_font;
 
 			/* Text color. */
-			prop<color> text_color{get_theme().text_color()};
+			prop<color> text_color;
 
 			/* Text alignment. */
-			prop<font::alignment> text_align{font::alignment::left};
+			prop<font::alignment> text_align;
 
 			/* Line height. */
-			prop<float> line_height{get_theme().line_height()};
+			prop<float> line_height;
 		};
 
 		/* Default constructor. */
@@ -104,6 +105,9 @@ namespace ag
 		/* Get height of this component. */
 		float height() const;
 
+		/* Tell whether or not this component should be hidden. */
+		bool hidden() const;
+
 		/* Hide this component. */
 		component &hide();
 
@@ -123,16 +127,19 @@ namespace ag
 		/* Parent of this component. */
 		std::optional<parent_ref> parent_;
 
+		/* Tells whether or not this component should be hidden. */
+		bool hidden_{false};
+
 		/* This component's label. */
 		std::string label_;
 
 		/* Draw this component's border. */
-		inline void draw_border() const;
+		void draw_border() const;
 
 		/* Draw this component's background. */
-		inline void draw_background() const;
+		void draw_background() const;
 
 		/* Draw this component's label. */
-		inline void draw_label() const;
+		void draw_label() const;
 	};
 }

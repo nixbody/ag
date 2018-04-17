@@ -19,7 +19,7 @@ namespace ag
 
 	void box::draw() const
 	{
-		if (!style().visible()) return;
+		if (hidden_) return;
 
 		component::draw();
 		for (const auto &c : children_) c.get().draw();
@@ -30,9 +30,7 @@ namespace ag
 		component *child = nullptr;
 		for (const auto &crw : children_) {
 			auto &c = crw.get();
-
 			const auto &s = c.style();
-			const auto v = s.visible();
 			const auto cx = s.x(), cy = s.y(), cw = s.width(), ch = s.height();
 
 			if (const auto *const cb = dynamic_cast<const box *>(&c)) {
@@ -42,7 +40,7 @@ namespace ag
 				}
 			}
 
-			if (v && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
+			if (!c.hidden_ && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
 				child = &c;
 			}
 		}
@@ -58,15 +56,15 @@ namespace ag
 	void box::child_added(component &child)
 	{
 		auto &cs = child.style();
-		cs.visible = [this] { return style().visible(); };
-		cs.x = [this, &child] { return child_x(child); };
-		cs.y = [this, &child] { return child_y(child); };
-		cs.width = [this, &child, w = child.width()] { return style().adjust_children_width() ? child_width(child) : w; };
-		cs.height = [this, &child, h = child.height()] { return style().adjust_children_height() ? child_height(child) : h; };
-		cs.text_font = [this] { return style().text_font(); };
-		cs.text_color = [this] { return style().text_color(); };
-		cs.text_align = [this] { return style().text_align(); };
-		cs.line_height = [this] { return style().line_height(); };
+
+		if (!cs.x) cs.x = [this, &child] { return child_x(child); };
+		if (!cs.y) cs.y = [this, &child] { return child_y(child); };
+		if (!cs.width) cs.width = [this, &child] { return child_width(child); };
+		if (!cs.height) cs.height = [this, &child] { return child_height(child); };
+		if (!cs.text_font) cs.text_font = [this] { return style().text_font(); };
+		if (!cs.text_color) cs.text_color = [this] { return style().text_color(); };
+		if (!cs.text_align) cs.text_align = [this] { return style().text_align(); };
+		if (!cs.line_height) cs.line_height = [this] { return style().line_height(); };
 	}
 
 	float box::child_x(const component &child) const

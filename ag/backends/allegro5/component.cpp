@@ -12,7 +12,7 @@ namespace ag
 
 	void component::draw() const
 	{
-		if (!style().visible()) return;
+		if (hidden_) return;
 
 		draw_border();
 		draw_background();
@@ -34,15 +34,20 @@ namespace ag
 		return style().height();
 	}
 
+	bool component::hidden() const
+	{
+		return hidden_;
+	}
+
 	component &component::hide()
 	{
-		style().visible = false;
+		hidden_ = true;
 		return *this;
 	}
 
 	component &component::show()
 	{
-		style().visible = true;
+		hidden_ = false;
 		return *this;
 	}
 
