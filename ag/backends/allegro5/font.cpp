@@ -3,6 +3,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_memfile.h>
 #include <allegro5/allegro_ttf.h>
+#include <cmath>
 #include <map>
 
 namespace ag
@@ -54,8 +55,8 @@ namespace ag
 		al_draw_multiline_text(
 			std::any_cast<const ALLEGRO_FONT *>(native_handle_),
 			al_map_rgba(color.r, color.g, color.b, color.a),
-			x,
-			y,
+			std::round(x),
+			std::round(y),
 			max_width,
 			line_height,
 			flags,
