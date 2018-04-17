@@ -68,6 +68,11 @@ namespace ag
 		return label_;
 	}
 
+	float component::label_width() const
+	{
+		return style().text_font().text_width(label_);
+	}
+
 	void component::draw_border() const
 	{
 		const auto &s = style();

@@ -18,7 +18,13 @@ namespace ag
 		font(const std::string &resource, const int size);
 
 		/* Destructor. */
-		~font();
+		~font() = default;
+
+		/* Get usual line height specified by this font. */
+		float line_height() const;
+
+		/* Get width of the given text when using this font. */
+		float text_width(const std::string &text) const;
 
 		/* Draw the given text using this font. */
 		void draw_text(

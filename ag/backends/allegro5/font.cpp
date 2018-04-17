@@ -21,7 +21,15 @@ namespace ag
 		native_handle_ = fonts.at({&resource, size});
 	}
 
-	font::~font() = default;
+	float font::line_height() const
+	{
+		return al_get_font_line_height(std::any_cast<const ALLEGRO_FONT *>(native_handle_));
+	}
+
+	float font::text_width(const std::string &text) const
+	{
+		return al_get_text_width(std::any_cast<const ALLEGRO_FONT *>(native_handle_), text.c_str());
+	}
 
 	void font::draw_text(
 		const std::string &text,

@@ -123,6 +123,9 @@ namespace ag
 		/* Get this component's label. */
 		const std::string &label() const;
 
+		/* Get width of this component's label. */
+		float label_width() const;
+
 	private:
 		/* Parent of this component. */
 		std::optional<parent_ref> parent_;
