@@ -16,7 +16,7 @@ namespace ag
 
 		/* Connect the given slot to this signal. */
 		template <typename Slot>
-		connection operator ()(Slot &&slot) const;
+		connection operator()(Slot &&slot) const;
 
 		/* Emit this signal. */
 		void emit(T && ... args) const;
@@ -31,7 +31,7 @@ namespace ag
 
 	template <typename ... T>
 	template <typename Slot>
-	typename signal<T ...>::connection signal<T ...>::operator ()(Slot &&slot) const
+	typename signal<T ...>::connection signal<T ...>::operator()(Slot &&slot) const
 	{
 		slots_.emplace_back(std::forward<Slot>(slot));
 		return slots_.size() - 1;

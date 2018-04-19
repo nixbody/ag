@@ -2,6 +2,7 @@
 
 #include "color.h"
 #include "font.h"
+#include "insets.h"
 
 #include <cstdlib>
 #include <utility>
@@ -26,6 +27,21 @@ namespace ag
 
 		/* Line height. */
 		virtual float line_height() const = 0;
+
+		/* Button radius. */
+		virtual float button_radius() const = 0;
+
+		/* Button padding. */
+		virtual insets button_padding() const = 0;
+
+		/* Button font. */
+		virtual font button_font() const = 0;
+
+		/* Button primary color. */
+		virtual color button_primary_color() const = 0;
+
+		/* Button secondary color. */
+		virtual color button_secondary_color() const = 0;
 
 	private:
 		/* Currently set theme. */

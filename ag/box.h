@@ -88,9 +88,9 @@ namespace ag
 	}
 
 	template <typename T, typename Function>
-	box &box::add(T &&child, const Function &setup)
+	box &box::add(T &&child, const Function &set_up)
 	{
-		setup(static_cast<T &>(add(std::forward<T>(child)).children_.back().get()));
+		set_up(static_cast<T &>(add(std::forward<T>(child)).children_.back().get()));
 		return *this;
 	}
 }

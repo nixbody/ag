@@ -17,7 +17,7 @@ namespace ag
 	/* Base class for UI components. */
 	class component
 	{
-		friend class box;
+		friend box;
 
 	public:
 		/* Parent reference type. */
