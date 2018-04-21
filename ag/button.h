@@ -32,12 +32,6 @@ namespace ag
 		/* Copy constructor. */
 		button(const button &btn);
 
-		/* Move assignment operator. */
-		button &operator=(button &&btn);
-
-		/* Copy assignment operator. */
-		button &operator=(const button &btn);
-
 		/* Get style of this button. */
 		style_type &style() override;
 

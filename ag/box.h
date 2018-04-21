@@ -3,7 +3,6 @@
 #include "component.h"
 
 #include <optional>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -33,11 +32,11 @@ namespace ag
 
 		/* Add the given component into this box. */
 		template <typename T>
-		box &add(T &&child);
+		box &add(T child);
 
 		/* Add the given component into this box. */
 		template <typename T, typename Function>
-		box &add(T &&child, const Function &setup);
+		box &add(T child, const Function &setup);
 
 		/* Get style of this box. */
 		style_type &style() override;
@@ -79,18 +78,18 @@ namespace ag
 	};
 
 	template <typename T>
-	box &box::add(T &&child)
+	box &box::add(T child)
 	{
-		children_.emplace_back(*(new std::decay_t<T>{std::forward<T>(child)}));
+		children_.emplace_back(*(new T{std::move(child)}));
 		children_.back().get().parent_ = *this;
 		child_added(children_.back().get());
 		return *this;
 	}
 
 	template <typename T, typename Function>
-	box &box::add(T &&child, const Function &set_up)
+	box &box::add(T child, const Function &set_up)
 	{
-		set_up(static_cast<T &>(add(std::forward<T>(child)).children_.back().get()));
+		set_up(static_cast<T &>(add(std::move(child)).children_.back().get()));
 		return *this;
 	}
 }

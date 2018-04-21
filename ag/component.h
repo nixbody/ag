@@ -2,8 +2,10 @@
 
 #include "border.h"
 #include "color.h"
+#include "events/mouse.h"
 #include "font.h"
 #include "insets.h"
+#include "signal.h"
 
 #include <functional>
 #include <optional>
@@ -75,6 +77,24 @@ namespace ag
 			prop<float> line_height;
 		};
 
+		/* Signal which is emitted when one or more mouse axis changed over this component. */
+		const signal<const events::mouse_axes_changed &> on_mouse_axes_changed;
+
+		/* Signal which is emitted when mouse cursor entered this component. */
+		const signal<const events::mouse_entered &> on_mouse_entered;
+
+		/* Signal which is emitted when mouse cursor left this component. */
+		const signal<const events::mouse_left &> on_mouse_left;
+
+		/* Signal which is emitted when a mouse button was pressed over this component. */
+		const signal<const events::mouse_button_pressed &> on_mouse_button_pressed;
+
+		/* Signal which is emitted when a mouse button was released over this component. */
+		const signal<const events::mouse_button_released &> on_mouse_button_released;
+
+		/* Signal which is emitted when this component was clicked. */
+		const signal<const events::mouse_clicked &> on_mouse_button_clicked;
+
 		/* Default constructor. */
 		component() = default;
 
@@ -125,6 +145,24 @@ namespace ag
 
 		/* Get width of this component's label. */
 		float label_width() const;
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_axes_changed &event);
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_entered &event);
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_left &event);
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_button_pressed &event);
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_button_released &event);
+
+		/* Trigger the given event on this component. */
+		virtual void trigger(const events::mouse_clicked &event);
 
 	private:
 		/* Parent of this component. */

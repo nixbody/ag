@@ -128,4 +128,34 @@ namespace ag
 
 		s.text_font().draw_text(label_, x, s.y() + p.top + b.thickness, w, s.text_color(), s.line_height(), a);
 	}
+
+	void component::trigger(const events::mouse_axes_changed &event)
+	{
+		on_mouse_axes_changed.emit(event);
+	}
+
+	void component::trigger(const events::mouse_entered &event)
+	{
+		on_mouse_entered.emit(event);
+	}
+
+	void component::trigger(const events::mouse_left &event)
+	{
+		on_mouse_left.emit(event);
+	}
+
+	void component::trigger(const events::mouse_button_pressed &event)
+	{
+		on_mouse_button_pressed.emit(event);
+	}
+
+	void component::trigger(const events::mouse_button_released &event)
+	{
+		on_mouse_button_released.emit(event);
+	}
+
+	void component::trigger(const events::mouse_clicked &event)
+	{
+		on_mouse_button_clicked.emit(event);
+	}
 }

@@ -14,20 +14,6 @@ namespace ag
 		set_up();
 	}
 
-	button &button::operator=(button &&btn)
-	{
-		component::operator=(std::move(btn));
-		set_up();
-		return *this;
-	}
-
-	button &button::operator=(const button &btn)
-	{
-		component::operator=(btn);
-		set_up();
-		return *this;
-	}
-
 	button::style_type &button::style()
 	{
 		return style_;

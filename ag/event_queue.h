@@ -16,7 +16,7 @@ namespace ag
 
 	public:
 		/* Signal which is emitted when some event occurs. */
-		const signal<std::any &&> on_event_occured;
+		const signal<const std::any &> on_event_occured;
 
 		/* Initialize this queue. */
 		event_queue();
