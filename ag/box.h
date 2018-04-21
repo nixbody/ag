@@ -82,7 +82,7 @@ namespace ag
 	{
 		children_.emplace_back(*(new T{std::move(child)}));
 		children_.back().get().parent_ = *this;
-		child_added(children_.back().get());
+		child_added(children_.back());
 		return *this;
 	}
 

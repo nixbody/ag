@@ -7,8 +7,7 @@ namespace ag
 		const auto &s = style();
 		float content_width{0.0f}, x = s.x();
 
-		for (const auto &crw : children()) {
-			const auto &c = crw.get();
+		for (const component &c : children()) {
 			const auto &cs = c.style();
 			const auto cm = cs.margin();
 
