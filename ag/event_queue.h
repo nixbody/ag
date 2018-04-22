@@ -8,11 +8,13 @@
 namespace ag
 {
 	class display;
+	class timer;
 
 	/* Collects and stores events. */
 	class event_queue final
 	{
 		friend display;
+		friend timer;
 
 	public:
 		/* Signal which is emitted when some event occurs. */
@@ -32,10 +34,10 @@ namespace ag
 
 	private:
 		/* Native underlaying (implmentation specific) event queue. */
-		std::any native_handle_;
+		const std::any native_handle_;
 
 		/* Native underlaying (implmentation specific) async event source. */
-		std::any async_event_source_native_handle_;
+		const std::any async_event_source_native_handle_;
 	};
 
 	/* Get the default event queue. */

@@ -1,4 +1,5 @@
 #include "../../event_queue.h"
+#include "../../timer.h"
 
 #include <allegro5/allegro.h>
 #include <memory>
@@ -38,8 +39,12 @@ namespace ag
 					(*std::unique_ptr<std::function<void ()>>{reinterpret_cast<std::function<void ()> *>(e.user.data1)})();
 					break;
 
-				default:
+				case ALLEGRO_EVENT_TIMER:
+					timer::get(e.timer.source).on_ticked.emit(static_cast<timer::count_type>(e.timer.count));
 					on_event_occured.emit(e);
+					break;
+
+				default: on_event_occured.emit(e);
 			}
 		}
 	}
