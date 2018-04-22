@@ -4,7 +4,7 @@
 
 namespace ag
 {
-	const timer &timer::get(const std::any &native_timer_handle)
+	timer &timer::get(const std::any &native_timer_handle)
 	{
 		return timers_.at(std::any_cast<ALLEGRO_TIMER *>(native_timer_handle));
 	}
@@ -25,5 +25,5 @@ namespace ag
 		timers_.erase(t);
 	}
 
-	std::unordered_map<timer::key_type, const timer &> timer::timers_;
+	std::unordered_map<timer::key_type, timer &> timer::timers_;
 }

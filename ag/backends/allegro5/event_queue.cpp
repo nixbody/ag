@@ -40,8 +40,11 @@ namespace ag
 					break;
 
 				case ALLEGRO_EVENT_TIMER:
-					timer::get(e.timer.source).on_ticked.emit(static_cast<timer::count_type>(e.timer.count));
-					on_event_occured.emit(e);
+					{
+						auto &timer = timer::get(e.timer.source);
+						timer.on_ticked.emit(events::timer_ticked{e.timer.count, timer});
+						on_event_occured.emit(e);
+					}
 					break;
 
 				default: on_event_occured.emit(e);

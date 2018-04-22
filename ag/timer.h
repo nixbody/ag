@@ -1,11 +1,11 @@
 #pragma once
 
 #include "event_queue.h"
+#include "events/timer.h"
 #include "signal.h"
 
 #include <any>
 #include <chrono>
-#include <cstdint>
 #include <unordered_map>
 
 namespace ag
@@ -16,14 +16,13 @@ namespace ag
 	class timer final
 	{
 	public:
-		using count_type = std::int64_t;
 		using key_type = void *;
 
 		/* Get timer with the given native handle. */
-		static const timer &get(const std::any &native_timer_handle);
+		static timer &get(const std::any &native_timer_handle);
 
 		/* Signal which is emitted when this timer ticked. */
-		const signal<count_type> on_ticked;
+		const signal<const events::timer_ticked &> on_ticked;
 
 		/* Create a new timer registered with the given event queue. */
 		template <typename Rep, typename Period>
@@ -37,7 +36,7 @@ namespace ag
 
 	private:
 		/* Collection of all currently existing timers. */
-		static std::unordered_map<key_type, const timer &> timers_;
+		static std::unordered_map<key_type, timer &> timers_;
 
 		/* Native underlaying (implmentation specific) timer. */
 		const std::any &native_handle_;
