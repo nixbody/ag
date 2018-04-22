@@ -43,12 +43,10 @@ namespace ag
 					{
 						auto &timer = timer::get(e.timer.source);
 						timer.on_ticked.emit(events::timer_ticked{e.timer.count, timer});
-						on_event_occured.emit(e);
 					}
 					break;
-
-				default: on_event_occured.emit(e);
 			}
+			on_event_occured.emit(e);
 		}
 	}
 
