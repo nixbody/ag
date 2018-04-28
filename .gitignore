@@ -2,6 +2,4 @@
 packages/
 Debug/
 Release/
-*.sln
-*.vcxproj
-*.vcxproj.*
+*.vcxproj.user
