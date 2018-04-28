@@ -18,4 +18,14 @@ namespace ag
 	color::color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a):
 		r{r}, g{g}, b{b}, a{a}
 	{}
+
+	bool color::operator==(const color &col) const
+	{
+		return r == col.r && g == col.g && b == col.b && a == col.a;
+	}
+
+	bool color::operator!=(const color &col) const
+	{
+		return !operator==(col);
+	}
 }

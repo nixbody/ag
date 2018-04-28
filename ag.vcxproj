@@ -165,6 +165,7 @@
     <ClCompile Include="ag\theme.cpp" />
     <ClCompile Include="ag\timer.cpp" />
     <ClCompile Include="ag\v_box.cpp" />
+    <ClCompile Include="tests\border_tests.cpp" />
     <ClCompile Include="tests\color_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
   </ItemGroup>
