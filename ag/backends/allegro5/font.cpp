@@ -8,14 +8,14 @@
 
 namespace ag
 {
-	font::font(const std::string &resource, const int size)
+	font::font(void *resource, const std::size_t resource_size, const int size)
 	{
-		static std::map<std::pair<const std::string *const, const int>, const ALLEGRO_FONT *const> fonts;
+		static std::map<std::pair<void *const, const int>, const ALLEGRO_FONT *const> fonts;
 
 		if (fonts.find({&resource, size}) == fonts.end()) {
 			fonts.try_emplace(
 				{&resource, size},
-				al_load_ttf_font_f(al_open_memfile(const_cast<char *>(resource.data()), resource.size(), "r"), nullptr, size, 0)
+				al_load_ttf_font_f(al_open_memfile(resource, resource_size, "r"), nullptr, size, 0)
 			);
 		}
 
@@ -27,13 +27,17 @@ namespace ag
 		return al_get_font_line_height(std::any_cast<const ALLEGRO_FONT *>(native_handle_));
 	}
 
-	float font::text_width(const std::string &text) const
+	float font::text_width(const std::string_view text) const
 	{
-		return al_get_text_width(std::any_cast<const ALLEGRO_FONT *>(native_handle_), text.c_str());
+		ALLEGRO_USTR_INFO info;
+		return al_get_ustr_width(
+			std::any_cast<const ALLEGRO_FONT *>(native_handle_),
+			al_ref_buffer(&info, text.data(), text.size())
+		);
 	}
 
 	void font::draw_text(
-		const std::string &text,
+		const std::string_view text,
 		const float x,
 		const float y,
 		const float max_width,
@@ -52,7 +56,8 @@ namespace ag
 			case alignment::center: flags = ALLEGRO_ALIGN_CENTER; break;
 		}
 
-		al_draw_multiline_text(
+		ALLEGRO_USTR_INFO info;
+		al_draw_multiline_ustr(
 			std::any_cast<const ALLEGRO_FONT *>(native_handle_),
 			al_map_rgba(color.r, color.g, color.b, color.a),
 			std::round(x),
@@ -60,7 +65,7 @@ namespace ag
 			max_width,
 			line_height,
 			flags,
-			text.c_str()
+			al_ref_buffer(&info, text.data(), text.size())
 		);
 	}
 }
