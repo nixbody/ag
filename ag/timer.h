@@ -29,7 +29,7 @@ namespace ag
 		timer(const std::chrono::duration<Rep, Period> &tick_interval, const event_queue &queue = default_event_queue());
 
 		/* Create a new timer registered with the given event queue. */
-		timer(const double tick_interval, const event_queue &queue = default_event_queue());
+		timer(double tick_interval, const event_queue &queue = default_event_queue());
 
 		/* Destroy this timer and unregister it from its event queue. */
 		~timer();

@@ -9,12 +9,12 @@ namespace ag
 		const float top, right, bottom, left;
 
 		/* Set all insets at once. */
-		insets(const float all);
+		insets(float all);
 
 		/* Create new insets. */
-		insets(const float top_bottom, const float right_left);
+		insets(float top_bottom, float right_left);
 
 		/* Create new insets. */
-		insets(const float top, const float right, const float bottom, const float left);
+		insets(float top, float right, float bottom, float left);
 	};
 }

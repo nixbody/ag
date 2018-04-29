@@ -14,6 +14,6 @@ namespace ag
 		const color color;
 
 		/* Create a new border. */
-		border(const float thickness, const ::ag::color color);
+		border(float thickness, const ::ag::color &color);
 	};
 }

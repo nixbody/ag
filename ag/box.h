@@ -48,7 +48,7 @@ namespace ag
 		void draw() const override;
 
 		/* Get topmost visible child at the given position. */
-		std::optional<child_ref> child_at_pos(const float x, const float y) const;
+		std::optional<child_ref> child_at_pos(float x, float y) const;
 
 		/* Get components inside this box. */
 		const std::vector<child_ref> &children() const;

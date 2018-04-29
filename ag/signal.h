@@ -22,7 +22,7 @@ namespace ag
 		void emit(T && ... args) const;
 
 		/* Disconnect a slot from this signal. */
-		void disconnect(const connection conn) const;
+		void disconnect(connection conn) const;
 
 	private:
 		/* List of slots connected to this signal. */
