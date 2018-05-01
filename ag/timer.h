@@ -39,7 +39,7 @@ namespace ag
 		static std::unordered_map<key_type, timer &> timers_;
 
 		/* Native underlaying (implmentation specific) timer. */
-		const std::any &native_handle_;
+		const std::any native_handle_;
 	};
 
 	template <typename Rep, typename Period>
