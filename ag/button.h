@@ -12,37 +12,17 @@ namespace ag
 		/* Inherit component constructors. */
 		using component::component;
 
-		/* Button style. */
-		struct style_type : component::style_type
+		/* Initialize a new button. */
+		button()
 		{
-			style_type()
-			{
-				padding = [] { return get_theme().button_padding(); };
-				radius = [] { return get_theme().button_radius(); };
-				bg_color = [] { return get_theme().button_primary_color(); };
-				text_font = [] { return get_theme().button_font(); };
-				text_color = [] { return get_theme().button_secondary_color(); };
-				text_align = font::alignment::center;
-			}
-		};
-
-		/* Move constructor. */
-		button(button &&btn);
-
-		/* Copy constructor. */
-		button(const button &btn);
-
-		/* Get style of this button. */
-		style_type &style() override;
-
-		/* Get style of this button. */
-		const style_type &style() const override;
-
-	private:
-		/* Style of this button. */
-		style_type style_;
-
-		/* Set up this button. */
-		void set_up();
+			width = [this] { return font().text_width(text()) + 31.0f; };
+			height = [this] { return font().line_height() + 19.0f; };
+			padding = [] { return get_theme().button_padding(); };
+			radius = [] { return get_theme().button_radius(); };
+			bg_color = [] { return get_theme().button_primary_color(); };
+			font = [] { return get_theme().button_font(); };
+			text_color = [] { return get_theme().button_secondary_color(); };
+			text_align = font::alignment::center;
+		}
 	};
 }

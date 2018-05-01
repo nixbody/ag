@@ -56,18 +56,7 @@ namespace ag
 
 		ALLEGRO_EVENT e;
 		e.user.type = async_event_type;
-		e.user.data1 = reinterpret_cast<intptr_t>(new std::function<void ()>{std::move(runner)});
+		e.user.data1 = reinterpret_cast<decltype(e.user.data1)>(new std::function<void ()>{std::move(runner)});
 		al_emit_user_event(std::any_cast<ALLEGRO_EVENT_SOURCE *>(async_event_source_native_handle_), &e, nullptr);
-	}
-
-	event_queue &default_event_queue()
-	{
-		static event_queue queue;
-		return queue;
-	}
-
-	void run_later(std::function<void ()> runner, const event_queue &queue)
-	{
-		queue.run_later(std::move(runner));
 	}
 }

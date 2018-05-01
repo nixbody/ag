@@ -9,10 +9,10 @@ namespace ag
 		return timers_.at(std::any_cast<ALLEGRO_TIMER *>(native_timer_handle));
 	}
 
-	timer::timer(const double tick_interval, const event_queue &queue):
+	timer::timer(const double tick_interval, event_queue &queue):
 		native_handle_{al_create_timer(tick_interval)}
 	{
-		auto *const t = std::any_cast<ALLEGRO_TIMER *>(native_handle_);
+		auto *const t{std::any_cast<ALLEGRO_TIMER *>(native_handle_)};
 		timers_.try_emplace(t, *this);
 		al_register_event_source(std::any_cast<ALLEGRO_EVENT_QUEUE *>(queue.native_handle_), al_get_timer_event_source(t));
 		al_start_timer(t);
@@ -20,10 +20,10 @@ namespace ag
 
 	timer::~timer()
 	{
-		auto *const t = std::any_cast<ALLEGRO_TIMER *>(native_handle_);
+		auto *const t{std::any_cast<ALLEGRO_TIMER *>(native_handle_)};
 		al_destroy_timer(t);
 		timers_.erase(t);
 	}
 
-	std::unordered_map<timer::key_type, timer &> timer::timers_;
+	std::unordered_map<void *, timer &> timer::timers_;
 }

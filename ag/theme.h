@@ -10,49 +10,50 @@
 namespace ag
 {
 	/* Base for application themes. */
-	struct theme
+	class theme
 	{
 		template <typename T>
 		friend void set_theme(T &&theme);
-		friend const theme &get_theme();
+		friend constexpr const theme &get_theme() noexcept;
 
+	public:
 		/* Destructor. */
-		virtual ~theme() = default;
+		virtual ~theme() noexcept = default;
 
 		/* Text font. */
 		virtual font text_font() const = 0;
 
 		/* Text color. */
-		virtual color text_color() const = 0;
+		virtual color text_color() const noexcept = 0;
 
 		/* Line height. */
-		virtual float line_height() const = 0;
+		virtual float line_height() const noexcept = 0;
 
 		/* Button radius. */
-		virtual float button_radius() const = 0;
+		virtual float button_radius() const noexcept = 0;
 
 		/* Button padding. */
-		virtual insets button_padding() const = 0;
+		virtual insets button_padding() const noexcept = 0;
 
 		/* Button font. */
 		virtual font button_font() const = 0;
 
 		/* Button primary color. */
-		virtual color button_primary_color() const = 0;
+		virtual color button_primary_color() const noexcept = 0;
 
 		/* Button secondary color. */
-		virtual color button_secondary_color() const = 0;
+		virtual color button_secondary_color() const noexcept = 0;
 
 	private:
 		/* Currently set theme. */
-		static const theme *current_;
+		static inline const theme *current_{nullptr};
 	};
 
 	/* Set the given theme. */
 	template <typename T>
 	void set_theme(T &&theme)
 	{
-		if (!theme::current_) {
+		if (theme::current_) {
 			delete theme::current_;
 		} else {
 			std::atexit([] { delete theme::current_; });
@@ -62,5 +63,6 @@ namespace ag
 	}
 
 	/* Get currently set theme. */
-	const theme &get_theme();
+	constexpr const theme &get_theme() noexcept
+	{ return *theme::current_; }
 }

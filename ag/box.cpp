@@ -2,123 +2,68 @@
 
 namespace ag
 {
-	box::~box()
+	std::optional<component_ref> box::child_at_pos(const float x, const float y) const
 	{
-		for (const component &c : children_) delete &c;
-	}
-
-	box::style_type &box::style()
-	{
-		return style_;
-	}
-
-	const box::style_type &box::style() const
-	{
-		return style_;
-	}
-
-	void box::draw() const
-	{
-		if (hidden_) return;
-
-		component::draw();
-		for (const component &c : children_) c.draw();
-	}
-
-	std::optional<box::child_ref> box::child_at_pos(const float x, const float y) const
-	{
-		component *child = nullptr;
-		for (component &c : children_) {
-			const auto &s = c.style();
-			const auto cx = s.x(), cy = s.y(), cw = s.width(), ch = s.height();
+		component *child{nullptr};
+		for (component &c : children_refs_) {
+			const auto cx{c.x()}, cy{c.y()}, cw{c.width()}, ch{c.height()};
 
 			if (
-				const auto *const cb = dynamic_cast<const box *>(&c);
+				const auto *const cb{dynamic_cast<const box *>(&c)};
 				cb && (child = &cb->child_at_pos(x, y).value_or(*child).get())
 			) continue;
 
-			if (!c.hidden_ && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
+			if (c.visible() && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
 				child = &c;
 			}
 		}
 
-		return child ? std::optional<box::child_ref>{*child} : std::nullopt;
-	}
-
-	const std::vector<box::child_ref> &box::children() const
-	{
-		return children_;
-	}
-
-	void box::child_added(component &child)
-	{
-		auto &cs = child.style();
-
-		if (!cs.x) cs.x = [this, &child] { return child_x(child); };
-		if (!cs.y) cs.y = [this, &child] { return child_y(child); };
-		if (!cs.width) cs.width = [this, &child] { return child_width(child); };
-		if (!cs.height) cs.height = [this, &child] { return child_height(child); };
-		if (!cs.text_font) cs.text_font = [this] { return style().text_font(); };
-		if (!cs.text_color) cs.text_color = [this] { return style().text_color(); };
-		if (!cs.text_align) cs.text_align = [this] { return style().text_align(); };
-		if (!cs.line_height) cs.line_height = [this] { return style().line_height(); };
+		return child ? std::optional<component_ref>{*child} : std::nullopt;
 	}
 
 	float box::child_x(const component &child) const
 	{
-		using a = box::style_type::alignment;
+		switch (align()) {
+			case box::alignment::center:
+			case box::alignment::top_center:
+			case box::alignment::bottom_center:
+				return x() + 0.5f * (width() - child.width());
 
-		const auto &s = style();
-		const auto p = s.padding();
+			case box::alignment::top_right:
+			case box::alignment::center_right:
+			case box::alignment::bottom_right:
+				return x() + width() - child.width() - border().thickness - padding().right;
 
-		switch (s.align()) {
-			case a::center:
-			case a::top_center:
-			case a::bottom_center:
-				return s.x() + 0.5f * (s.width() - child.style().width());
-
-			case a::top_right:
-			case a::center_right:
-			case a::bottom_right:
-				return s.x() + s.width() - child.style().width() - s.border().thickness - p.right;
-
-			default: return s.x() + s.border().thickness + p.left;
+			default: return x() + border().thickness + padding().left;
 		}
 	}
 
 	float box::child_y(const component &child) const
 	{
-		using a = box::style_type::alignment;
+		switch (align()) {
+			case box::alignment::center:
+			case box::alignment::center_left:
+			case box::alignment::center_right:
+				return y() + 0.5f * (height() - child.height());
 
-		const auto &s = style();
-		const auto p = s.padding();
+			case box::alignment::bottom_left:
+			case box::alignment::bottom_right:
+			case box::alignment::bottom_center:
+				return y() + height() - child.height() - border().thickness - padding().bottom;
 
-		switch (s.align()) {
-			case a::center:
-			case a::center_left:
-			case a::center_right:
-				return s.y() + 0.5f * (s.height() - child.style().height());
-
-			case a::bottom_left:
-			case a::bottom_right:
-			case a::bottom_center:
-				return s.y() + s.height() - child.style().height() - s.border().thickness - p.bottom;
-
-			default: return s.y() + s.border().thickness + p.top;
+			default: return y() + border().thickness + padding().top;
 		}
 	}
 
 	float box::child_width(const component &child) const
 	{
-		auto &s = style();
-		const auto p = s.padding(), cm = child.style().margin();
-		return s.width() - p.left - p.right - cm.left - cm.right - 2.0f * s.border().thickness;
+		const auto p{padding()}, cm{child.margin()};
+		return width() - p.left - p.right - cm.left - cm.right - 2.0f * border().thickness;
 	}
 
 	float box::child_height(const component &child) const
 	{
-		auto &s = style();
-		const auto p = s.padding(), cm = child.style().margin();
-		return s.height() - p.top - p.bottom - cm.top - cm.bottom - 2.0f * s.border().thickness;
+		const auto p{padding()}, cm{child.margin()};
+		return height() - p.top - p.bottom - cm.top - cm.bottom - 2.0f * border().thickness;
 	}
 }

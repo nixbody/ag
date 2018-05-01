@@ -14,6 +14,7 @@ namespace ag
 		const color color;
 
 		/* Create a new border. */
-		border(float thickness, const ::ag::color &color);
+		constexpr border(float thickness, const ::ag::color &color) noexcept: thickness{thickness}, color{color}
+		{}
 	};
 }

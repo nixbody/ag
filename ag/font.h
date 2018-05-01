@@ -16,8 +16,9 @@ namespace ag
 		enum class alignment {left, right, center};
 
 		/* Create a new font with the given size from the given resource. */
-		template <std::size_t ArraySize>
-		font(std::array<std::byte, ArraySize> &resource, int size);
+		template <auto ArraySize>
+		constexpr font(std::array<std::byte, ArraySize> &resource, int size): font{resource.data(), resource.size(), size}
+		{}
 
 		/* Create a new font with the given size from the given resource. */
 		font(void *resource, std::size_t resource_size, int size);
@@ -43,8 +44,4 @@ namespace ag
 		/* Handle to a native underlaying (implmentation specific) font resource. */
 		std::any native_handle_;
 	};
-
-	template <std::size_t ArraySize>
-	font::font(std::array<std::byte, ArraySize> &resource, const int size): font{resource.data(), resource.size(), size}
-	{}
 }

@@ -149,25 +149,24 @@
     <ClCompile Include="ag\backends\allegro5\display.cpp" />
     <ClCompile Include="ag\backends\allegro5\event_queue.cpp" />
     <ClCompile Include="ag\backends\allegro5\font.cpp" />
-    <ClCompile Include="ag\border.cpp" />
     <ClCompile Include="ag\box.cpp" />
-    <ClCompile Include="ag\button.cpp" />
-    <ClCompile Include="ag\color.cpp" />
     <ClCompile Include="ag\h_box.cpp" />
-    <ClCompile Include="ag\insets.cpp" />
-    <ClCompile Include="ag\label.cpp" />
     <ClCompile Include="ag\resources\material_icons_regular_woff.cpp" />
     <ClCompile Include="ag\resources\roboto_bold_woff.cpp" />
     <ClCompile Include="ag\resources\roboto_italic_woff.cpp" />
     <ClCompile Include="ag\resources\roboto_light_woff.cpp" />
     <ClCompile Include="ag\resources\roboto_medium_woff.cpp" />
     <ClCompile Include="ag\resources\roboto_regular_woff.cpp" />
-    <ClCompile Include="ag\theme.cpp" />
     <ClCompile Include="ag\timer.cpp" />
     <ClCompile Include="ag\v_box.cpp" />
     <ClCompile Include="tests\border_tests.cpp" />
+    <ClCompile Include="tests\box_tests.cpp" />
     <ClCompile Include="tests\color_tests.cpp" />
+    <ClCompile Include="tests\h_box_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\prop_tests.cpp" />
+    <ClCompile Include="tests\signal_tests.cpp" />
+    <ClCompile Include="tests\v_box_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ag\border.h" />
@@ -183,12 +182,12 @@
     <ClInclude Include="ag\h_box.h" />
     <ClInclude Include="ag\insets.h" />
     <ClInclude Include="ag\label.h" />
+    <ClInclude Include="ag\prop.h" />
     <ClInclude Include="ag\resources.h" />
     <ClInclude Include="ag\signal.h" />
     <ClInclude Include="ag\theme.h" />
     <ClInclude Include="ag\timer.h" />
     <ClInclude Include="ag\v_box.h" />
-    <ClInclude Include="tests\catch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

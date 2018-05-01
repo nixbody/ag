@@ -45,28 +45,10 @@
     <ClCompile Include="ag\resources\roboto_regular_woff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ag\border.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ag\box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ag\button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\color.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ag\h_box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\insets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ag\timer.cpp">
@@ -82,6 +64,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\border_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\box_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\prop_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\signal_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\h_box_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\v_box_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,7 +137,7 @@
     <ClInclude Include="ag\v_box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tests\catch.hpp">
+    <ClInclude Include="ag\prop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,11 +8,10 @@ namespace ag
 	class v_box : public box
 	{
 	public:
-		/* Vertical box style. */
-		struct style_type : box::style_type
-		{};
+		/* Inherit box constructors. */
+		using box::box;
 
-	protected:
+	private:
 		/* Get supposed Y coordinate of the given child. */
 		float child_y(const component &child) const override;
 	};
