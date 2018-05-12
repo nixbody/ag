@@ -140,6 +140,9 @@
     <ClInclude Include="ag\prop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ag\type_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

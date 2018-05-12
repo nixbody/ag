@@ -1,10 +1,10 @@
 #pragma once
 
 #include "component.h"
+#include "type_traits.h"
 
 #include <memory>
 #include <optional>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -28,13 +28,13 @@ namespace ag
 		std::optional<component_ref> child_at_pos(float x, float y) const;
 
 		/* Add a component of the given type into this box and forward the given arguments to its constructor. */
-		template <typename T, typename ... U>
-		box &add(U && ... args);
+		template <typename Component, typename ... T>
+		box &add(T && ... args);
 
 		/* Add a component of the given type into this box and pass it to the given callback. */
-		template <typename T, typename Invokable, typename = std::enable_if_t<std::is_invocable_v<Invokable, T &>>>
-		box &add(Invokable &&set_up)
-		{ set_up(add<T>().children_refs_.back().get()); return *this; }
+		template<typename Component, typename Invocable, typename = enable_if_invocable_t<Invocable, Component &>>
+		box &add(Invocable &&set_up)
+		{ set_up(add<Component>().children_refs_.back().get()); return *this; }
 
 		/* Get components stored inside this box. */
 		constexpr const std::vector<component_ref> &children() const noexcept
@@ -68,10 +68,10 @@ namespace ag
 		{}
 	};
 
-	template <typename T, typename ... U>
-	box &box::add(U && ... args)
+	template <typename Component, typename ... T>
+	box &box::add(T && ... args)
 	{
-		component &child = children_refs_.emplace_back(*children_.emplace_back(new T{std::forward<U>(args)...}));
+		component &child = children_refs_.emplace_back(*children_.emplace_back(new Component{std::forward<T>(args)...}));
 
 		if (!child.x) child.x = [this, &child] { return child_x(child); };
 		if (!child.y) child.y = [this, &child] { return child_y(child); };

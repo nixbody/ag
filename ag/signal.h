@@ -1,7 +1,8 @@
 #pragma once
 
+#include "type_traits.h"
+
 #include <functional>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -16,7 +17,7 @@ namespace ag
 		struct connection final { const typename std::vector<slot_type>::size_type id; };
 
 		/* Connect the given slot to this signal. */
-		template <typename Slot, typename = std::enable_if_t<std::is_convertible_v<Slot, slot_type>>>
+		template <typename Slot, typename = enable_if_convertible_t<Slot, slot_type>>
 		connection operator()(Slot &&slot)
 		{ slots_.emplace_back(std::forward<Slot>(slot)); return {slots_.size() - 1}; }
 

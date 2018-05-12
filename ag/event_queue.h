@@ -1,10 +1,10 @@
 #pragma once
 
 #include "signal.h"
+#include "type_traits.h"
 
 #include <any>
 #include <functional>
-#include <type_traits>
 #include <utility>
 
 namespace ag
@@ -43,7 +43,7 @@ namespace ag
 		/* Start waiting for events. */
 		void wait_for_events() const;
 
-		/* Run the given invokable object on the main/UI thread. */
+		/* Run the given invocable object on the main/UI thread. */
 		void run_later(std::function<void ()> runner) const;
 
 	private:
@@ -58,8 +58,8 @@ namespace ag
 	inline event_queue &default_event_queue()
 	{ static event_queue queue; return queue; }
 
-	/* Run the given invokable object on the main/UI thread. */
-	template <typename Invokable, typename = std::enable_if_t<std::is_convertible_v<Invokable, std::function<void ()>>>>
-	void run_later(Invokable &&runner, const event_queue &queue = default_event_queue())
-	{ queue.run_later(std::forward<Invokable>(runner)); }
+	/* Run the given invocable object on the main/UI thread. */
+	template <typename Invocable, typename = enable_if_convertible_t<Invocable, std::function<void ()>>>
+	void run_later(Invocable &&runner, event_queue &queue = default_event_queue())
+	{ queue.run_later(std::forward<Invocable>(runner)); }
 }

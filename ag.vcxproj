@@ -187,6 +187,7 @@
     <ClInclude Include="ag\signal.h" />
     <ClInclude Include="ag\theme.h" />
     <ClInclude Include="ag\timer.h" />
+    <ClInclude Include="ag\type_traits.h" />
     <ClInclude Include="ag\v_box.h" />
   </ItemGroup>
   <ItemGroup>
