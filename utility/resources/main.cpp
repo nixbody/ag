@@ -53,8 +53,9 @@ int main()
 		std::ofstream cpp{(std::string("../../ag/resources/") += name) += ".cpp"};
 
 		hpp << "\tstd::array<std::byte, " << resource.size << "> &" << name << "();\n";
-		cpp << "#include <array>\n#include <cstddef>\n\nnamespace ag::resources\n{"
-			<< "\n\tauto &" << name << "()\n\t{\n\t\tstatic std::array<std::byte, " << resource.size << "> data"
+		cpp << "#include \"../resources.h\"\n\nnamespace ag::resources\n{"
+			<< "\n\tstd::array<std::byte, " << resource.size << "> &" << name
+			<< "()\n\t{\n\t\tstatic std::array<std::byte, " << resource.size << "> data"
 			<< resource.encoded_data << ";\n\t\treturn data;\n\t}\n}\n";
 	}
 	hpp << "}\n";
