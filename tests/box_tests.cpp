@@ -70,6 +70,25 @@ SCENARIO("Adding children into a box", "[box]")
 	}
 }
 
+SCENARIO("Children sizing", "[box]")
+{
+	GIVEN("a box with children")
+	{
+		ag::box box;
+		box.width = box.height = 10.0f; box.padding = 10.0f;
+		box.add<ag::label>();
+
+		WHEN("the box calculates its children size")
+		{
+			THEN("neither width nor height are ever lower than zero")
+			{
+				REQUIRE(box.children().front().get().width() == 0.0f);
+				REQUIRE(box.children().front().get().height() == 0.0f);
+			}
+		}
+	}
+}
+
 SCENARIO("Children are aligned according to their parent box alignment setting", "[box]")
 {
 	ag::box box;

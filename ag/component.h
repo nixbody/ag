@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <string_view>
+#include <utility>
 
 namespace ag
 {
@@ -84,7 +85,7 @@ namespace ag
 		component &operator=(component &&) = delete;
 
 		/* Draw this component on the screen. */
-		inline void draw() const;
+		void draw() const;
 
 		/* Tell whether or not this component has a parent. */
 		constexpr bool has_parent() const noexcept
@@ -118,18 +119,23 @@ namespace ag
 		component &trigger(const events::mouse_clicked &event)
 		{ return trigger(on_clicked, event); }
 
+	protected:
+		/* Draw the given text onto this component. */
+		inline void draw_text(std::string_view text) const;
+
 	private:
 		/* Parent of this component. */
 		const box *parent_{nullptr};
 
 		/* Draw this component's border. */
-		virtual void draw_border() const;
+		virtual void draw_border(float x, float y, float width, float height, float radius, const ag::border &border) const;
 
 		/* Draw this component's background. */
-		virtual void draw_background() const;
+		virtual void draw_background(float x, float y, float width, float height, float radius, const ag::border &border) const;
 
 		/* Draw this component's content. */
-		virtual void draw_content() const;
+		virtual void draw_content() const
+		{ if (text) draw_text(text()); }
 
 		/* Will be called when the given event was triggered on this component. */
 		virtual void event_triggered(const events::mouse_axes_changed &event)
@@ -157,23 +163,28 @@ namespace ag
 
 		/* Trigger the given event on this component and then emit the given signal. */
 		template <typename Signal, typename Event>
-		component &trigger(const Signal &signal, const Event &event);
+		component &trigger(Signal &&signal, Event &&event)
+		{
+			event_triggered(std::forward<Event>(event));
+			signal.emit(std::forward<Event>(event));
+			return *this;
+		}
 	};
 
-	void component::draw() const
+	void component::draw_text(const std::string_view text) const
 	{
-		if (!visible()) return;
+		if (text.empty()) return;
 
-		draw_border();
-		draw_background();
-		draw_content();
-	}
+		const auto p{padding()};
+		const auto b{border()};
+		auto x{this->x() + p.left + b.thickness}, w{width() - p.left - p.right - 2.0f * b.thickness};
 
-	template <typename Signal, typename Event>
-	component &component::trigger(const Signal &signal, const Event &event)
-	{
-		event_triggered(event);
-		signal.emit(event);
-		return *this;
+		const auto a{text_align()};
+		switch (a) {
+			case font::alignment::center: x += 0.5f * w; break;
+			case font::alignment::right: x += w; break;
+		}
+
+		font().draw_text(text, x, y() + p.top + b.thickness, w, text_color(), line_height(), a);
 	}
 }

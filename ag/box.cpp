@@ -1,5 +1,7 @@
 #include "box.h"
 
+#include <algorithm>
+
 namespace ag
 {
 	std::optional<component_ref> box::child_at_pos(const float x, const float y) const
@@ -58,12 +60,12 @@ namespace ag
 	float box::child_width(const component &child) const
 	{
 		const auto p{padding()}, cm{child.margin()};
-		return width() - p.left - p.right - cm.left - cm.right - 2.0f * border().thickness;
+		return std::max(0.0f, width() - p.left - p.right - cm.left - cm.right - 2.0f * border().thickness);
 	}
 
 	float box::child_height(const component &child) const
 	{
 		const auto p{padding()}, cm{child.margin()};
-		return height() - p.top - p.bottom - cm.top - cm.bottom - 2.0f * border().thickness;
+		return std::max(0.0f, height() - p.top - p.bottom - cm.top - cm.bottom - 2.0f * border().thickness);
 	}
 }

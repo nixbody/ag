@@ -34,7 +34,7 @@ namespace ag
 		/* Add a component of the given type into this box and pass it to the given callback. */
 		template<typename Component, typename Invocable, typename = enable_if_invocable_t<Invocable, Component &>>
 		box &add(Invocable &&set_up)
-		{ set_up(add<Component>().children_refs_.back().get()); return *this; }
+		{ set_up(static_cast<Component &>(add<Component>().children_refs_.back().get())); return *this; }
 
 		/* Get components stored inside this box. */
 		constexpr const std::vector<component_ref> &children() const noexcept
