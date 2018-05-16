@@ -20,6 +20,9 @@ namespace ag
 		/* Destructor. */
 		virtual ~theme() noexcept = default;
 
+		/* Background color. */
+		virtual color bg_color() const noexcept = 0;
+
 		/* Text font. */
 		virtual font text_font() const = 0;
 

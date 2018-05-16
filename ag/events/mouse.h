@@ -55,19 +55,6 @@ namespace ag::events
 		component &target;
 	};
 
-	/* Triggered when a mouse button was released. */
-	struct mouse_button_released final
-	{
-		/* Mouse button which was released. */
-		const unsigned button;
-
-		/* Mouse coordinates. */
-		const int x, y, z, w;
-
-		/* Target component. */
-		component &target;
-	};
-
 	/* Triggered when the target component is clicked. */
 	struct mouse_clicked final
 	{

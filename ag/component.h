@@ -60,9 +60,6 @@ namespace ag
 		/* Signal which is emitted when a mouse button was pressed over this component. */
 		signal<const events::mouse_button_pressed &> on_mouse_button_pressed;
 
-		/* Signal which is emitted when a mouse button was released over this component. */
-		signal<const events::mouse_button_released &> on_mouse_button_released;
-
 		/* Signal which is emitted when this component was clicked. */
 		signal<const events::mouse_clicked &> on_clicked;
 
@@ -112,10 +109,6 @@ namespace ag
 		{ return trigger(on_mouse_button_pressed, event); }
 
 		/* Trigger the given event on this component. */
-		component &trigger(const events::mouse_button_released &event)
-		{ return trigger(on_mouse_button_released, event); }
-
-		/* Trigger the given event on this component. */
 		component &trigger(const events::mouse_clicked &event)
 		{ return trigger(on_clicked, event); }
 
@@ -151,10 +144,6 @@ namespace ag
 
 		/* Will be called when the given event was triggered on this component. */
 		virtual void event_triggered(const events::mouse_button_pressed &event)
-		{}
-
-		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_button_released &event)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
