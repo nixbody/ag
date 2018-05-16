@@ -8,7 +8,7 @@ SCENARIO("Adding children into a box", "[box]")
 	GIVEN("we have a box and some components")
 	{
 		ag::box box;
-		box.x = 123.0f; box.y = 321.0f; box.width = 800.0f; box.height = 600.0f; box.line_height = 32.0f;
+		box.x = box.y = 0.0f; box.width = 800.0f; box.height = 600.0f; box.line_height = 32.0f;
 		box.text_color = {1, 2, 3}; box.text_align = ag::font::alignment::center;
 
 		WHEN("we add those components into the box")
@@ -65,6 +65,24 @@ SCENARIO("Adding children into a box", "[box]")
 			{
 				c2->get().visible = false;
 				REQUIRE(box.child_at_pos(13.0f, 13.0f)->get().text() == "Child 2");
+			}
+		}
+		AND_WHEN("the box is not visible")
+		{
+			box.visible = false;
+
+			THEN("its children are considered invisible too")
+			{
+				box.add<ag::label>([](auto &c) { c.x = c.y = 1.0f; });
+				REQUIRE(!box.child_at_pos(1.0f, 1.0f));
+			}
+		}
+		AND_WHEN("we ask for a child on a position outside its parent region")
+		{
+			THEN("nullopt is returned")
+			{
+				box.add<ag::label>([](auto &c) { c.x = c.y = 9999.0f; });
+				REQUIRE(!box.child_at_pos(9999.0f, 9999.0f));
 			}
 		}
 	}

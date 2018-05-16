@@ -1,4 +1,5 @@
 #include "box.h"
+#include "region.h"
 
 #include <algorithm>
 
@@ -6,16 +7,16 @@ namespace ag
 {
 	std::optional<component_ref> box::child_at_pos(const float x, const float y) const
 	{
+		if (!visible() || !region{*this}.contains(x, y)) return std::nullopt;
+
 		component *child{nullptr};
 		for (component &c : children_refs_) {
-			const auto cx{c.x()}, cy{c.y()}, cw{c.width()}, ch{c.height()};
-
 			if (
 				const auto *const cb{dynamic_cast<const box *>(&c)};
 				cb && (child = &cb->child_at_pos(x, y).value_or(*child).get())
 			) continue;
 
-			if (c.visible() && x >= cx && x < cx + cw && y >= cy && y < cy + ch) {
+			if (c.visible() && region{c}.contains(x, y)) {
 				child = &c;
 			}
 		}

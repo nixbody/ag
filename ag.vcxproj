@@ -165,6 +165,7 @@
     <ClCompile Include="tests\h_box_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\prop_tests.cpp" />
+    <ClCompile Include="tests\region_tests.cpp" />
     <ClCompile Include="tests\signal_tests.cpp" />
     <ClCompile Include="tests\v_box_tests.cpp" />
   </ItemGroup>
@@ -183,6 +184,7 @@
     <ClInclude Include="ag\insets.h" />
     <ClInclude Include="ag\label.h" />
     <ClInclude Include="ag\prop.h" />
+    <ClInclude Include="ag\region.h" />
     <ClInclude Include="ag\resources.h" />
     <ClInclude Include="ag\signal.h" />
     <ClInclude Include="ag\theme.h" />
