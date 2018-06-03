@@ -84,6 +84,9 @@
     <ClCompile Include="tests\region_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ag\events\mouse.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ag\region.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
