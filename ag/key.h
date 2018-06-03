@@ -154,430 +154,430 @@ namespace ag
 		constexpr key(int code) noexcept: code{code}
 		{}
 
-		constexpr bool is_a() const
+		constexpr bool is_a() const noexcept
 		{ return code == a; }
 
-		constexpr bool is_b() const
+		constexpr bool is_b() const noexcept
 		{ return code == b; }
 
-		constexpr bool is_c() const
+		constexpr bool is_c() const noexcept
 		{ return code == c; }
 
-		constexpr bool is_d() const
+		constexpr bool is_d() const noexcept
 		{ return code == d; }
 
-		constexpr bool is_e() const
+		constexpr bool is_e() const noexcept
 		{ return code == e; }
 
-		constexpr bool is_f() const
+		constexpr bool is_f() const noexcept
 		{ return code == f; }
 
-		constexpr bool is_g() const
+		constexpr bool is_g() const noexcept
 		{ return code == g; }
 
-		constexpr bool is_h() const
+		constexpr bool is_h() const noexcept
 		{ return code == h; }
 
-		constexpr bool is_i() const
+		constexpr bool is_i() const noexcept
 		{ return code == i; }
 
-		constexpr bool is_j() const
+		constexpr bool is_j() const noexcept
 		{ return code == j; }
 
-		constexpr bool is_k() const
+		constexpr bool is_k() const noexcept
 		{ return code == k; }
 
-		constexpr bool is_l() const
+		constexpr bool is_l() const noexcept
 		{ return code == l; }
 
-		constexpr bool is_m() const
+		constexpr bool is_m() const noexcept
 		{ return code == m; }
 
-		constexpr bool is_n() const
+		constexpr bool is_n() const noexcept
 		{ return code == n; }
 
-		constexpr bool is_o() const
+		constexpr bool is_o() const noexcept
 		{ return code == o; }
 
-		constexpr bool is_p() const
+		constexpr bool is_p() const noexcept
 		{ return code == p; }
 
-		constexpr bool is_q() const
+		constexpr bool is_q() const noexcept
 		{ return code == q; }
 
-		constexpr bool is_r() const
+		constexpr bool is_r() const noexcept
 		{ return code == r; }
 
-		constexpr bool is_s() const
+		constexpr bool is_s() const noexcept
 		{ return code == s; }
 
-		constexpr bool is_t() const
+		constexpr bool is_t() const noexcept
 		{ return code == t; }
 
-		constexpr bool is_u() const
+		constexpr bool is_u() const noexcept
 		{ return code == u; }
 
-		constexpr bool is_v() const
+		constexpr bool is_v() const noexcept
 		{ return code == v; }
 
-		constexpr bool is_w() const
+		constexpr bool is_w() const noexcept
 		{ return code == w; }
 
-		constexpr bool is_x() const
+		constexpr bool is_x() const noexcept
 		{ return code == x; }
 
-		constexpr bool is_y() const
+		constexpr bool is_y() const noexcept
 		{ return code == y; }
 
-		constexpr bool is_z() const
+		constexpr bool is_z() const noexcept
 		{ return code == z; }
 
-		constexpr bool is_0() const
+		constexpr bool is_0() const noexcept
 		{ return code == num_0; }
 
-		constexpr bool is_1() const
+		constexpr bool is_1() const noexcept
 		{ return code == num_1; }
 
-		constexpr bool is_2() const
+		constexpr bool is_2() const noexcept
 		{ return code == num_2; }
 
-		constexpr bool is_3() const
+		constexpr bool is_3() const noexcept
 		{ return code == num_3; }
 
-		constexpr bool is_4() const
+		constexpr bool is_4() const noexcept
 		{ return code == num_4; }
 
-		constexpr bool is_5() const
+		constexpr bool is_5() const noexcept
 		{ return code == num_5; }
 
-		constexpr bool is_6() const
+		constexpr bool is_6() const noexcept
 		{ return code == num_6; }
 
-		constexpr bool is_7() const
+		constexpr bool is_7() const noexcept
 		{ return code == num_7; }
 
-		constexpr bool is_8() const
+		constexpr bool is_8() const noexcept
 		{ return code == num_8; }
 
-		constexpr bool is_9() const
+		constexpr bool is_9() const noexcept
 		{ return code == num_9; }
 
-		constexpr bool is_pad_0() const
+		constexpr bool is_pad_0() const noexcept
 		{ return code == pad_0; }
 
-		constexpr bool is_pad_1() const
+		constexpr bool is_pad_1() const noexcept
 		{ return code == pad_1; }
 
-		constexpr bool is_pad_2() const
+		constexpr bool is_pad_2() const noexcept
 		{ return code == pad_2; }
 
-		constexpr bool is_pad_3() const
+		constexpr bool is_pad_3() const noexcept
 		{ return code == pad_3; }
 
-		constexpr bool is_pad_4() const
+		constexpr bool is_pad_4() const noexcept
 		{ return code == pad_4; }
 
-		constexpr bool is_pad_5() const
+		constexpr bool is_pad_5() const noexcept
 		{ return code == pad_5; }
 
-		constexpr bool is_pad_6() const
+		constexpr bool is_pad_6() const noexcept
 		{ return code == pad_6; }
 
-		constexpr bool is_pad_7() const
+		constexpr bool is_pad_7() const noexcept
 		{ return code == pad_7; }
 
-		constexpr bool is_pad_8() const
+		constexpr bool is_pad_8() const noexcept
 		{ return code == pad_8; }
 
-		constexpr bool is_pad_9() const
+		constexpr bool is_pad_9() const noexcept
 		{ return code == pad_9; }
 
-		constexpr bool is_f1() const
+		constexpr bool is_f1() const noexcept
 		{ return code == f1; }
 
-		constexpr bool is_f2() const
+		constexpr bool is_f2() const noexcept
 		{ return code == f2; }
 
-		constexpr bool is_f3() const
+		constexpr bool is_f3() const noexcept
 		{ return code == f3; }
 
-		constexpr bool is_f4() const
+		constexpr bool is_f4() const noexcept
 		{ return code == f4; }
 
-		constexpr bool is_f5() const
+		constexpr bool is_f5() const noexcept
 		{ return code == f5; }
 
-		constexpr bool is_f6() const
+		constexpr bool is_f6() const noexcept
 		{ return code == f6; }
 
-		constexpr bool is_f7() const
+		constexpr bool is_f7() const noexcept
 		{ return code == f7; }
 
-		constexpr bool is_f8() const
+		constexpr bool is_f8() const noexcept
 		{ return code == f8; }
 
-		constexpr bool is_f9() const
+		constexpr bool is_f9() const noexcept
 		{ return code == f9; }
 
-		constexpr bool is_f10() const
+		constexpr bool is_f10() const noexcept
 		{ return code == f10; }
 
-		constexpr bool is_f11() const
+		constexpr bool is_f11() const noexcept
 		{ return code == f11; }
 
-		constexpr bool is_f12() const
+		constexpr bool is_f12() const noexcept
 		{ return code == f12; }
 
-		constexpr bool is_escape() const
+		constexpr bool is_escape() const noexcept
 		{ return code == escape; }
 
-		constexpr bool is_tilde() const
+		constexpr bool is_tilde() const noexcept
 		{ return code == tilde; }
 
-		constexpr bool is_minus() const
+		constexpr bool is_minus() const noexcept
 		{ return code == minus; }
 
-		constexpr bool is_equals() const
+		constexpr bool is_equals() const noexcept
 		{ return code == equals; }
 
-		constexpr bool is_backspace() const
+		constexpr bool is_backspace() const noexcept
 		{ return code == backspace; }
 
-		constexpr bool is_tab() const
+		constexpr bool is_tab() const noexcept
 		{ return code == tab; }
 
-		constexpr bool is_openbrace() const
+		constexpr bool is_openbrace() const noexcept
 		{ return code == openbrace; }
 
-		constexpr bool is_closebrace() const
+		constexpr bool is_closebrace() const noexcept
 		{ return code == closebrace; }
 
-		constexpr bool is_enter() const
+		constexpr bool is_enter() const noexcept
 		{ return code == enter; }
 
-		constexpr bool is_semicolon() const
+		constexpr bool is_semicolon() const noexcept
 		{ return code == semicolon; }
 
-		constexpr bool is_quote() const
+		constexpr bool is_quote() const noexcept
 		{ return code == quote; }
 
-		constexpr bool is_backslash() const
+		constexpr bool is_backslash() const noexcept
 		{ return code == backslash; }
 
-		constexpr bool is_backslash2() const
+		constexpr bool is_backslash2() const noexcept
 		{ return code == backslash2; }
 
-		constexpr bool is_comma() const
+		constexpr bool is_comma() const noexcept
 		{ return code == comma; }
 
-		constexpr bool is_fullstop() const
+		constexpr bool is_fullstop() const noexcept
 		{ return code == fullstop; }
 
-		constexpr bool is_slash() const
+		constexpr bool is_slash() const noexcept
 		{ return code == slash; }
 
-		constexpr bool is_space() const
+		constexpr bool is_space() const noexcept
 		{ return code == space; }
 
-		constexpr bool is_insert() const
+		constexpr bool is_insert() const noexcept
 		{ return code == insert; }
 
-		constexpr bool is_delete() const
+		constexpr bool is_delete() const noexcept
 		{ return code == del; }
 
-		constexpr bool is_home() const
+		constexpr bool is_home() const noexcept
 		{ return code == home; }
 
-		constexpr bool is_end() const
+		constexpr bool is_end() const noexcept
 		{ return code == end; }
 
-		constexpr bool is_pgup() const
+		constexpr bool is_pgup() const noexcept
 		{ return code == pgup; }
 
-		constexpr bool is_pgdn() const
+		constexpr bool is_pgdn() const noexcept
 		{ return code == pgdn; }
 
-		constexpr bool is_left() const
+		constexpr bool is_left() const noexcept
 		{ return code == left; }
 
-		constexpr bool is_right() const
+		constexpr bool is_right() const noexcept
 		{ return code == right; }
 
-		constexpr bool is_up() const
+		constexpr bool is_up() const noexcept
 		{ return code == up; }
 
-		constexpr bool is_down() const
+		constexpr bool is_down() const noexcept
 		{ return code == down; }
 
-		constexpr bool is_pad_slash() const
+		constexpr bool is_pad_slash() const noexcept
 		{ return code == pad_slash; }
 
-		constexpr bool is_pad_asterisk() const
+		constexpr bool is_pad_asterisk() const noexcept
 		{ return code == pad_asterisk; }
 
-		constexpr bool is_pad_minus() const
+		constexpr bool is_pad_minus() const noexcept
 		{ return code == pad_minus; }
 
-		constexpr bool is_pad_plus() const
+		constexpr bool is_pad_plus() const noexcept
 		{ return code == pad_plus; }
 
-		constexpr bool is_pad_delete() const
+		constexpr bool is_pad_delete() const noexcept
 		{ return code == pad_delete; }
 
-		constexpr bool is_pad_enter() const
+		constexpr bool is_pad_enter() const noexcept
 		{ return code == pad_enter; }
 
-		constexpr bool is_printscreen() const
+		constexpr bool is_printscreen() const noexcept
 		{ return code == printscreen; }
 
-		constexpr bool is_pause() const
+		constexpr bool is_pause() const noexcept
 		{ return code == pause; }
 
-		constexpr bool is_abnt_c1() const
+		constexpr bool is_abnt_c1() const noexcept
 		{ return code == abnt_c1; }
 
-		constexpr bool is_yen() const
+		constexpr bool is_yen() const noexcept
 		{ return code == yen; }
 
-		constexpr bool is_kana() const
+		constexpr bool is_kana() const noexcept
 		{ return code == kana; }
 
-		constexpr bool is_convert() const
+		constexpr bool is_convert() const noexcept
 		{ return code == convert; }
 
-		constexpr bool is_noconvert() const
+		constexpr bool is_noconvert() const noexcept
 		{ return code == noconvert; }
 
-		constexpr bool is_at() const
+		constexpr bool is_at() const noexcept
 		{ return code == at; }
 
-		constexpr bool is_circumflex() const
+		constexpr bool is_circumflex() const noexcept
 		{ return code == circumflex; }
 
-		constexpr bool is_colon2() const
+		constexpr bool is_colon2() const noexcept
 		{ return code == colon2; }
 
-		constexpr bool is_kanji() const
+		constexpr bool is_kanji() const noexcept
 		{ return code == kanji; }
 
-		constexpr bool is_pad_equals() const
+		constexpr bool is_pad_equals() const noexcept
 		{ return code == pad_equals; }
 
-		constexpr bool is_backquote() const
+		constexpr bool is_backquote() const noexcept
 		{ return code == backquote; }
 
-		constexpr bool is_semicolon2() const
+		constexpr bool is_semicolon2() const noexcept
 		{ return code == semicolon2; }
 
-		constexpr bool is_command() const
+		constexpr bool is_command() const noexcept
 		{ return code == command; }
 
-		constexpr bool is_back() const
+		constexpr bool is_back() const noexcept
 		{ return code == back; }
 
-		constexpr bool is_volume_up() const
+		constexpr bool is_volume_up() const noexcept
 		{ return code == volume_up; }
 
-		constexpr bool is_volume_down() const
+		constexpr bool is_volume_down() const noexcept
 		{ return code == volume_down; }
 
-		constexpr bool is_search() const
+		constexpr bool is_search() const noexcept
 		{ return code == search; }
 
-		constexpr bool is_dpad_center() const
+		constexpr bool is_dpad_center() const noexcept
 		{ return code == dpad_center; }
 
-		constexpr bool is_button_x() const
+		constexpr bool is_button_x() const noexcept
 		{ return code == button_x; }
 
-		constexpr bool is_button_y() const
+		constexpr bool is_button_y() const noexcept
 		{ return code == button_y; }
 
-		constexpr bool is_dpad_up() const
+		constexpr bool is_dpad_up() const noexcept
 		{ return code == dpad_up; }
 
-		constexpr bool is_dpad_down() const
+		constexpr bool is_dpad_down() const noexcept
 		{ return code == dpad_down; }
 
-		constexpr bool is_dpad_left() const
+		constexpr bool is_dpad_left() const noexcept
 		{ return code == dpad_left; }
 
-		constexpr bool is_dpad_right() const
+		constexpr bool is_dpad_right() const noexcept
 		{ return code == dpad_right; }
 
-		constexpr bool is_select() const
+		constexpr bool is_select() const noexcept
 		{ return code == select; }
 
-		constexpr bool is_start() const
+		constexpr bool is_start() const noexcept
 		{ return code == start; }
 
-		constexpr bool is_button_l1() const
+		constexpr bool is_button_l1() const noexcept
 		{ return code == button_l1; }
 
-		constexpr bool is_button_r1() const
+		constexpr bool is_button_r1() const noexcept
 		{ return code == button_r1; }
 
-		constexpr bool is_button_l2() const
+		constexpr bool is_button_l2() const noexcept
 		{ return code == button_l2; }
 
-		constexpr bool is_button_r2() const
+		constexpr bool is_button_r2() const noexcept
 		{ return code == button_r2; }
 
-		constexpr bool is_button_a() const
+		constexpr bool is_button_a() const noexcept
 		{ return code == button_a; }
 
-		constexpr bool is_button_b() const
+		constexpr bool is_button_b() const noexcept
 		{ return code == button_b; }
 
-		constexpr bool is_thumbl() const
+		constexpr bool is_thumbl() const noexcept
 		{ return code == thumbl; }
 
-		constexpr bool is_thumbr() const
+		constexpr bool is_thumbr() const noexcept
 		{ return code == thumbr; }
 
-		constexpr bool is_unknown() const
+		constexpr bool is_unknown() const noexcept
 		{ return code == unknown; }
 
-		constexpr bool is_shift() const
+		constexpr bool is_shift() const noexcept
 		{ return code == lshift || code == rshift; }
 
-		constexpr bool is_lshift() const
+		constexpr bool is_lshift() const noexcept
 		{ return code == lshift; }
 
-		constexpr bool is_rshift() const
+		constexpr bool is_rshift() const noexcept
 		{ return code == rshift; }
 
-		constexpr bool is_ctrl() const
+		constexpr bool is_ctrl() const noexcept
 		{ return code == lctrl || code == rctrl; }
 
-		constexpr bool is_lctrl() const
+		constexpr bool is_lctrl() const noexcept
 		{ return code == lctrl; }
 
-		constexpr bool is_rctrl() const
+		constexpr bool is_rctrl() const noexcept
 		{ return code == rctrl; }
 
-		constexpr bool is_alt() const
+		constexpr bool is_alt() const noexcept
 		{ return code == alt; }
 
-		constexpr bool is_altgr() const
+		constexpr bool is_altgr() const noexcept
 		{ return code == altgr; }
 
-		constexpr bool is_lwin() const
+		constexpr bool is_lwin() const noexcept
 		{ return code == lwin; }
 
-		constexpr bool is_rwin() const
+		constexpr bool is_rwin() const noexcept
 		{ return code == rwin; }
 
-		constexpr bool is_menu() const
+		constexpr bool is_menu() const noexcept
 		{ return code == menu; }
 
-		constexpr bool is_scrolllock() const
+		constexpr bool is_scrolllock() const noexcept
 		{ return code == scrolllock; }
 
-		constexpr bool is_numlock() const
+		constexpr bool is_numlock() const noexcept
 		{ return code == numlock; }
 
-		constexpr bool is_capslock() const
+		constexpr bool is_capslock() const noexcept
 		{ return code == capslock; }
 	};
 }
