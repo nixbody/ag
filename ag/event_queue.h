@@ -40,8 +40,11 @@ namespace ag
 		/* Enable move-assignment. */
 		event_queue &operator=(event_queue &&) = default;
 
-		/* Start waiting for events. */
-		void wait_for_events() const;
+		/* Wait for an event. */
+		std::any wait_for_event() const;
+
+		/* Process the given event. */
+		void process_event(const std::any &event) const;
 
 		/* Run the given invocable object on the main/UI thread. */
 		void run_later(std::function<void ()> runner) const;
@@ -57,6 +60,10 @@ namespace ag
 	/* Get the default event queue. */
 	inline event_queue &default_event_queue()
 	{ static event_queue queue; return queue; }
+
+	/* Run an event loop using the given event queue as the event provider. */
+	constexpr void run_event_loop(const event_queue &queue = default_event_queue())
+	{ for(;;) queue.process_event(queue.wait_for_event()); }
 
 	/* Run the given invocable object on the main/UI thread. */
 	template <typename Invocable, typename = enable_if_convertible_t<Invocable, std::function<void ()>>>
