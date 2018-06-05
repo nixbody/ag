@@ -51,10 +51,10 @@ namespace ag
 
 	private:
 		/* Native underlaying (implmentation specific) event queue. */
-		const std::any native_handle_;
+		std::any native_handle_;
 
 		/* Native underlaying (implmentation specific) async event source. */
-		const std::any async_event_source_native_handle_;
+		std::any async_event_source_native_handle_;
 	};
 
 	/* Get the default event queue. */
