@@ -177,6 +177,7 @@
     <ClInclude Include="ag\color.h" />
     <ClInclude Include="ag\component.h" />
     <ClInclude Include="ag\display.h" />
+    <ClInclude Include="ag\events\keyboard.h" />
     <ClInclude Include="ag\events\mouse.h" />
     <ClInclude Include="ag\events\timer.h" />
     <ClInclude Include="ag\event_queue.h" />
