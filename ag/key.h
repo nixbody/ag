@@ -150,10 +150,6 @@ namespace ag
 		/* This key's code. */
 		const int code;
 
-		/* Set this key's code. */
-		constexpr key(int code) noexcept: code{code}
-		{}
-
 		constexpr bool is_a() const noexcept
 		{ return code == a; }
 
