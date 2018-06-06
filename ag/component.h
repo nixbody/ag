@@ -2,6 +2,7 @@
 
 #include "border.h"
 #include "color.h"
+#include "events/keyboard.h"
 #include "events/mouse.h"
 #include "font.h"
 #include "insets.h"
@@ -63,6 +64,15 @@ namespace ag
 		/* Signal which is emitted when this component was clicked. */
 		signal<const events::mouse_clicked &> on_clicked;
 
+		/* Signal which is emitted when this component is focused and a key was pressed. */
+		signal<const events::key_pressed &> on_key_pressed;
+
+		/* Signal which is emitted when this component is focused and a key was released. */
+		signal<const events::key_released &> on_key_released;
+
+		/* Signal which is emitted when this component is focused and a character was typed. */
+		signal<const events::character_typed &> on_character_typed;
+
 		/* Default constructor. */
 		component() = default;
 
@@ -112,6 +122,18 @@ namespace ag
 		component &trigger(const events::mouse_clicked &event)
 		{ return trigger(on_clicked, event); }
 
+		/* Trigger the given event on this component. */
+		component &trigger(const events::key_pressed &event)
+		{ return trigger(on_key_pressed, event); }
+
+		/* Trigger the given event on this component. */
+		component &trigger(const events::key_released &event)
+		{ return trigger(on_key_released, event); }
+
+		/* Trigger the given event on this component. */
+		component &trigger(const events::character_typed &event)
+		{ return trigger(on_character_typed, event); }
+
 	protected:
 		/* Draw the given text onto this component. */
 		inline void draw_text(std::string_view text) const;
@@ -148,6 +170,18 @@ namespace ag
 
 		/* Will be called when the given event was triggered on this component. */
 		virtual void event_triggered(const events::mouse_clicked &event)
+		{}
+
+		/* Will be called when the given event was triggered on this component. */
+		virtual void event_triggered(const events::key_pressed &event)
+		{}
+
+		/* Will be called when the given event was triggered on this component. */
+		virtual void event_triggered(const events::key_released &event)
+		{}
+
+		/* Will be called when the given event was triggered on this component. */
+		virtual void event_triggered(const events::character_typed &event)
 		{}
 
 		/* Trigger the given event on this component and then emit the given signal. */
