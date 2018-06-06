@@ -25,8 +25,8 @@ namespace ag
 		friend box;
 
 	public:
-		/* Tells whether or not this component is supposed to be visible. */
-		prop<bool> visible{true};
+		/* Tells whether or not this component is supposed to be visible and/or is focusable. */
+		prop<bool> visible{true}, focusable{true};
 
 		/* Position coordinates, dimensions and corners' radius. */
 		prop<float> x, y, width, height, line_height, radius{0.0f};

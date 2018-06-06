@@ -24,6 +24,10 @@ namespace ag
 		/* Children alignment. */
 		prop<alignment> align{alignment::top_left};
 
+		/* Initialize the newly created box. */
+		box()
+		{ focusable = false; }
+
 		/* Get topmost visible child at the given position. */
 		std::optional<component_ref> child_at_pos(float x, float y) const;
 
