@@ -28,17 +28,17 @@ namespace ag
 		/* Disable copying. */
 		event_queue(const event_queue &) = delete;
 
-		/* Allow moving. */
-		event_queue(event_queue &&) = default;
+		/* Disable moving. */
+		event_queue(event_queue &&) = delete;
 
 		/* Tear down this queue. */
-		~event_queue();
+		~event_queue() noexcept;
 
 		/* Disable copy-assignment. */
 		event_queue &operator=(const event_queue &) = delete;
 
-		/* Enable move-assignment. */
-		event_queue &operator=(event_queue &&) = default;
+		/* Disable move-assignment. */
+		event_queue &operator=(event_queue &&) = delete;
 
 		/* Wait for an event. */
 		std::any wait_for_event() const;
@@ -51,10 +51,10 @@ namespace ag
 
 	private:
 		/* Native underlaying (implmentation specific) event queue. */
-		std::any native_handle_;
+		const std::any native_handle_;
 
 		/* Native underlaying (implmentation specific) async event source. */
-		std::any async_event_source_native_handle_;
+		const std::any async_event_source_native_handle_;
 	};
 
 	/* Get the default event queue. */

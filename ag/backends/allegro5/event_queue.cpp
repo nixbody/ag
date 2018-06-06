@@ -19,7 +19,7 @@ namespace ag
 		);
 	}
 
-	event_queue::~event_queue()
+	event_queue::~event_queue() noexcept
 	{
 		al_destroy_event_queue(std::any_cast<ALLEGRO_EVENT_QUEUE *>(native_handle_));
 		al_destroy_user_event_source(std::any_cast<ALLEGRO_EVENT_SOURCE *>(async_event_source_native_handle_));

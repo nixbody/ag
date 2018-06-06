@@ -34,8 +34,20 @@ namespace ag
 		/* Create a new timer registered with the given event queue. */
 		timer(double tick_interval, event_queue &queue = default_event_queue());
 
+		/* Disable copying. */
+		timer(const timer &) = delete;
+
+		/* Disable moving. */
+		timer(timer &&) = delete;
+
 		/* Destroy this timer and unregister it from its event queue. */
-		~timer();
+		~timer() noexcept;
+
+		/* Disable copy-assignment. */
+		timer &operator=(const timer &) = delete;
+
+		/* Disable move-assignment. */
+		timer &operator=(timer &&) = delete;
 
 	private:
 		/* Collection of all currently existing timers. */

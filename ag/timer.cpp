@@ -18,7 +18,7 @@ namespace ag
 		al_start_timer(t);
 	}
 
-	timer::~timer()
+	timer::~timer() noexcept
 	{
 		auto *const t{std::any_cast<ALLEGRO_TIMER *>(native_handle_)};
 		al_destroy_timer(t);
