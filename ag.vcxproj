@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ag\animations\ripple.cpp" />
     <ClCompile Include="ag\backends\allegro5\component.cpp" />
     <ClCompile Include="ag\backends\allegro5\display.cpp" />
     <ClCompile Include="ag\backends\allegro5\event_queue.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="tests\v_box_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ag\animations\ripple.h" />
     <ClInclude Include="ag\border.h" />
     <ClInclude Include="ag\box.h" />
     <ClInclude Include="ag\button.h" />
