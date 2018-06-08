@@ -47,7 +47,7 @@ namespace ag
 		prop<font::alignment> text_align;
 
 		/* Text label. */
-		prop<std::string_view> text;
+		prop<std::string_view> text{""};
 
 		/* Signal which is emitted when one or more mouse axes changed over this component. */
 		signal<const events::mouse_axes_changed &> on_mouse_axes_changed;
@@ -150,7 +150,7 @@ namespace ag
 
 		/* Draw this component's content. */
 		virtual void draw_content() const
-		{ if (text) draw_text(text()); }
+		{ draw_text(text()); }
 
 		/* Will be called when the given event was triggered on this component. */
 		virtual void event_triggered(const events::mouse_axes_changed &event)
