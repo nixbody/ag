@@ -27,9 +27,10 @@ namespace ag
 
 		/* Create a new timer registered with the given event queue. */
 		template <typename Rep, typename Period>
-		constexpr timer(const duration<Rep, Period> &tick_interval, event_queue &queue = default_event_queue()):
-			timer{duration<double>{tick_interval}.count(), queue}
-		{}
+		constexpr timer(
+			const duration<Rep, Period> &tick_interval, bool paused = false, event_queue &queue = default_event_queue()
+		): timer{duration<double>{tick_interval}.count(), queue}
+		{ if (paused) pause(); }
 
 		/* Create a new timer registered with the given event queue. */
 		timer(double tick_interval, event_queue &queue = default_event_queue());
