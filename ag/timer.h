@@ -49,6 +49,12 @@ namespace ag
 		/* Disable move-assignment. */
 		timer &operator=(timer &&) = delete;
 
+		/* Pause this timer. */
+		timer &pause();
+
+		/* Resume this timer. */
+		timer &resume();
+
 	private:
 		/* Collection of all currently existing timers. */
 		static std::unordered_map<void *, timer &> timers_;

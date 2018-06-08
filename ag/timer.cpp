@@ -25,5 +25,17 @@ namespace ag
 		timers_.erase(t);
 	}
 
+	timer &timer::pause()
+	{
+		al_stop_timer(std::any_cast<ALLEGRO_TIMER *>(native_handle_));
+		return *this;
+	}
+
+	timer &timer::resume()
+	{
+		al_resume_timer(std::any_cast<ALLEGRO_TIMER *>(native_handle_));
+		return *this;
+	}
+
 	std::unordered_map<void *, timer &> timer::timers_;
 }
