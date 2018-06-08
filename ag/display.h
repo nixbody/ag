@@ -72,7 +72,7 @@ namespace ag
 		const decltype(event_queue_.on_event_occured)::connection on_event_occured;
 
 		/* Timer responsible for periodic (if necessary) redrawing of this display. */
-		timer redraw_timer_{40.0ms};
+		timer redraw_timer_{33.3ms};
 
 		/* Tells whether or not this display should be redrawn and whether or not drawing is paused. */
 		bool should_redraw_{true}, drawing_paused_{false};
