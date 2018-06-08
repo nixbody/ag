@@ -27,7 +27,7 @@ SCENARIO("Adding children into a box", "[box]")
 			{
 				REQUIRE(box.children()[0].get().text() == "Child 1");
 				REQUIRE(box.children()[1].get().text() == "Child 2");
-				REQUIRE(!box.children()[2].get().text);
+				REQUIRE(box.children()[2].get().text().empty());
 			}
 
 			THEN("children inherit position, size and text style from parent box")
