@@ -84,7 +84,7 @@ namespace ag
 
 	void display::handle_event(const std::any &event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(event)};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(event)};
 		should_redraw_ = true;
 		switch (e.type) {
 			case ALLEGRO_EVENT_KEY_DOWN: handle_key_pressed(e); break;
@@ -111,7 +111,7 @@ namespace ag
 
 	void display::handle_mouse_axes_changed(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).mouse};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).mouse};
 		if (scene_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			auto &t{acquired_component_ ? *acquired_component_ : scene_->child_at_pos(e.x, e.y).value_or(*scene_).get()};
 			if (&t != last_event_target_) {
@@ -127,7 +127,7 @@ namespace ag
 
 	void display::handle_mouse_button_pressed(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).mouse};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).mouse};
 		if (scene_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			component &t = scene_->child_at_pos(e.x, e.y).value_or(*scene_);
 			acquired_component_ = last_event_target_ = &t;
@@ -138,7 +138,7 @@ namespace ag
 
 	void display::handle_mouse_clicked(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).mouse};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).mouse};
 		if (scene_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			auto &t{acquired_component_ ? *acquired_component_ : scene_->child_at_pos(e.x, e.y).value_or(*scene_).get()};
 			acquired_component_ = nullptr;
@@ -149,7 +149,7 @@ namespace ag
 
 	void display::handle_key_pressed(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).keyboard};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).keyboard};
 		if (focused_component_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			focused_component_->trigger(events::key_pressed{e.keycode, *focused_component_});
 		}
@@ -157,7 +157,7 @@ namespace ag
 
 	void display::handle_key_released(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).keyboard};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).keyboard};
 		if (focused_component_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			focused_component_->trigger(events::key_released{e.keycode, *focused_component_});
 		}
@@ -165,7 +165,7 @@ namespace ag
 
 	void display::handle_character_typed(const std::any &native_event)
 	{
-		const auto e{std::any_cast<ALLEGRO_EVENT>(native_event).keyboard};
+		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event).keyboard};
 		if (focused_component_ && e.display == std::any_cast<ALLEGRO_DISPLAY *>(native_handle_)) {
 			char chr[5];
 			chr[al_utf8_encode(chr, e.unichar)] = '\0';
