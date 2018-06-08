@@ -25,5 +25,17 @@ namespace ag
 			text_color = [] { return get_theme().button_secondary_color(); };
 			text_align = font::alignment::center;
 		}
+
+	private:
+		/* Background color stash. */
+		prop<color> bg_color_;
+
+		/* Will be called when the given event was triggered on this component. */
+		void event_triggered(const events::mouse_entered &event) override
+		{ bg_color_ = std::move(bg_color); bg_color = bg_color_().darker(30.0); }
+
+		/* Will be called when the given event was triggered on this component. */
+		void event_triggered(const events::mouse_left &event) override
+		{ bg_color = std::move(bg_color_); }
 	};
 }
