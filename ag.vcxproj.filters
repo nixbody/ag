@@ -87,6 +87,9 @@
     <ClCompile Include="ag\backends\allegro5\key.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\start.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ag\events\mouse.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ag\events\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\start.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

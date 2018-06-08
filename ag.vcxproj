@@ -150,6 +150,7 @@
     <ClCompile Include="ag\backends\allegro5\event_queue.cpp" />
     <ClCompile Include="ag\backends\allegro5\font.cpp" />
     <ClCompile Include="ag\backends\allegro5\key.cpp" />
+    <ClCompile Include="ag\backends\allegro5\start.cpp" />
     <ClCompile Include="ag\box.cpp" />
     <ClCompile Include="ag\h_box.cpp" />
     <ClCompile Include="ag\resources\material_icons_regular_woff.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="ag\prop.h" />
     <ClInclude Include="ag\region.h" />
     <ClInclude Include="ag\resources.h" />
+    <ClInclude Include="ag\start.h" />
     <ClInclude Include="ag\signal.h" />
     <ClInclude Include="ag\theme.h" />
     <ClInclude Include="ag\timer.h" />
