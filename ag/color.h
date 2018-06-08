@@ -8,6 +8,14 @@ namespace ag
 	class color final
 	{
 	public:
+		/* Darken the given color channel. */
+		static constexpr uint8_t darker(uint8_t ch, double by) noexcept
+		{ return uint8_t(ch * (100.0 / (100.0 + by))); }
+
+		/* Brighten the given color channel. */
+		static constexpr uint8_t brighter(uint8_t ch, double by) noexcept
+		{ return uint8_t(255u - ((255u - ch) * (100.0 / (100.0 + by)))); }
+
 		/* Individual channels of this color. */
 		const uint8_t r, g, b, a;
 
@@ -30,5 +38,13 @@ namespace ag
 		/* Compare this color to the given color. */
 		constexpr bool operator!=(const color &col) const noexcept
 		{ return !operator==(col); }
+
+		/* Create a darker variant of this color. */
+		constexpr color darker(double by) const noexcept
+		{ return {darker(r, by), darker(g, by), darker(b, by), a}; }
+
+		/* Create a brighter variant of this color. */
+		constexpr color brighter(double by) const noexcept
+		{ return {brighter(r, by), brighter(g, by), brighter(b, by), a}; }
 	};
 }
