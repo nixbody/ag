@@ -9,6 +9,8 @@ namespace ag
 	display::display(const int width, const int height, const std::string_view title, event_queue &event_queue):
 		native_handle_{[width, height, title] {
 			al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_RESIZABLE);
+			al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
+			al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
 			al_set_new_window_title(std::string{title}.c_str());
 			return al_create_display(width, height);
 		}()},
