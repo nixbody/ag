@@ -1,7 +1,10 @@
 #pragma once
 
+#include "animations/ripple.h"
 #include "component.h"
 #include "theme.h"
+
+#include <algorithm>
 
 namespace ag
 {
@@ -30,6 +33,13 @@ namespace ag
 		/* Background color stash. */
 		prop<color> bg_color_;
 
+		/* Ripple effect. */
+		animations::ripple ripple_;
+
+		/* Draw this component's content. */
+		void draw_content() const override
+		{ ripple_.draw_frame(); draw_text(text()); }
+
 		/* Will be called when the given event was triggered on this component. */
 		void event_triggered(const events::mouse_entered &event) override
 		{ bg_color_ = std::move(bg_color); bg_color = bg_color_().darker(30.0); }
@@ -37,5 +47,9 @@ namespace ag
 		/* Will be called when the given event was triggered on this component. */
 		void event_triggered(const events::mouse_left &event) override
 		{ bg_color = std::move(bg_color_); }
+
+		/* Will be called when the given event was triggered on this component. */
+		void event_triggered(const events::mouse_button_pressed &event) override
+		{ ripple_(float(event.x), float(event.y), std::max(width(), height()), bg_color_().brighter(30.0)); }
 	};
 }
