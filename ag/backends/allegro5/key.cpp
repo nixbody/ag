@@ -144,4 +144,4 @@ namespace ag
 	const int key::scrolllock{ALLEGRO_KEY_SCROLLLOCK};
 	const int key::numlock{ALLEGRO_KEY_NUMLOCK};
 	const int key::capslock{ALLEGRO_KEY_CAPSLOCK};
-};
+}
