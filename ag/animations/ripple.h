@@ -15,7 +15,7 @@ namespace ag::animations
 		ripple()
 		{
 			timer_.on_ticked([this](const auto &) {
-				if ((current_radius_ += 10.0f) > radius_) {
+				if ((current_radius_ += 5.0f) > radius_) {
 					current_radius_ = 0.0f;
 					timer_.pause();
 				}
@@ -36,7 +36,7 @@ namespace ag::animations
 
 	private:
 		/* Animation timer. */
-		timer timer_{33.3ms, true};
+		timer timer_{10.0ms, true};
 
 		/* Coordinates, radius and current radius. */
 		float x_, y_, radius_, current_radius_;
