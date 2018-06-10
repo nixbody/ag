@@ -24,7 +24,7 @@ auto resource_name(const fs::directory_entry &entry)
 /* Encode the given resource as an array of characters. */
 resource encode_resource(const fs::directory_entry &entry)
 {
-	std::ifstream in{entry, std::ios::binary};
+	std::ifstream in{entry.path().string(), std::ios::binary};
 	std::stringstream buff;
 	std::stringstream out;
 	std::size_t size{0};

@@ -16,7 +16,7 @@ namespace ag
 	class timer final
 	{
 	public:
-		template <typename Rep, typename Period = std::chrono::duration<Rep>::period>
+		template <typename Rep, typename Period = typename std::chrono::duration<Rep>::period>
 		using duration = std::chrono::duration<Rep, Period>;
 
 		/* Get timer with the given native handle. */

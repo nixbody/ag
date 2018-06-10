@@ -9,12 +9,21 @@
 
 namespace ag
 {
+	class theme;
+
+	/* Get currently set theme. */
+	inline const theme &get_theme() noexcept;
+
+	/* Set the given theme. */
+	template <typename T>
+	void set_theme(T &&theme);
+
 	/* Base for application themes. */
 	class theme
 	{
 		template <typename T>
 		friend void set_theme(T &&theme);
-		friend constexpr const theme &get_theme() noexcept;
+		friend const theme &get_theme() noexcept;
 
 	public:
 		/* Destructor. */
@@ -52,7 +61,6 @@ namespace ag
 		static inline const theme *current_{nullptr};
 	};
 
-	/* Set the given theme. */
 	template <typename T>
 	void set_theme(T &&theme)
 	{
@@ -65,7 +73,6 @@ namespace ag
 		theme::current_ = new T{std::forward<T>(theme)};
 	}
 
-	/* Get currently set theme. */
-	constexpr const theme &get_theme() noexcept
+	const theme &get_theme() noexcept
 	{ return *theme::current_; }
 }
