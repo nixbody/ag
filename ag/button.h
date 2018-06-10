@@ -41,11 +41,11 @@ namespace ag
 		{ ripple_.draw_frame(); draw_text(text()); }
 
 		/* Will be called when the given event was triggered on this component. */
-		void event_triggered(const events::mouse_entered &event) override
+		void event_triggered(const events::mouse_entered &) override
 		{ bg_color_ = std::move(bg_color); bg_color = bg_color_().darker(30.0); }
 
 		/* Will be called when the given event was triggered on this component. */
-		void event_triggered(const events::mouse_left &event) override
+		void event_triggered(const events::mouse_left &) override
 		{ bg_color = std::move(bg_color_); }
 
 		/* Will be called when the given event was triggered on this component. */

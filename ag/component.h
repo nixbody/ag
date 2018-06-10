@@ -153,35 +153,35 @@ namespace ag
 		{ draw_text(text()); }
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_axes_changed &event)
+		virtual void event_triggered(const events::mouse_axes_changed &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_entered &event)
+		virtual void event_triggered(const events::mouse_entered &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_left &event)
+		virtual void event_triggered(const events::mouse_left &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_button_pressed &event)
+		virtual void event_triggered(const events::mouse_button_pressed &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::mouse_clicked &event)
+		virtual void event_triggered(const events::mouse_clicked &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::key_pressed &event)
+		virtual void event_triggered(const events::key_pressed &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::key_released &event)
+		virtual void event_triggered(const events::key_released &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */
-		virtual void event_triggered(const events::character_typed &event)
+		virtual void event_triggered(const events::character_typed &)
 		{}
 
 		/* Trigger the given event on this component and then emit the given signal. */

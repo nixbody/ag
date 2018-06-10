@@ -68,7 +68,7 @@ namespace ag
 		virtual float child_height(const component &child) const;
 
 		/* Will be called when a component is added into this box. */
-		virtual void child_added(component &child)
+		virtual void child_added(component &)
 		{}
 	};
 
