@@ -62,7 +62,7 @@ namespace ag
 	{ static event_queue queue; return queue; }
 
 	/* Run an event loop using the given event queue as the event provider. */
-	constexpr void run_event_loop(const event_queue &queue = default_event_queue())
+	inline void run_event_loop(const event_queue &queue = default_event_queue())
 	{ for(;;) queue.process_event(queue.wait_for_event()); }
 
 	/* Run the given invocable object on the main/UI thread. */
