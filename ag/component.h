@@ -206,6 +206,7 @@ namespace ag
 		switch (a) {
 			case font::alignment::center: x += 0.5f * w; break;
 			case font::alignment::right: x += w; break;
+			case font::alignment::left: break;
 		}
 
 		font().draw_text(text, x, y() + p.top + b.thickness, w, text_color(), line_height(), a);
