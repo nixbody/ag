@@ -17,6 +17,7 @@ namespace ag
 		draw_background(x, y, w, h, r, b);
 		al_set_clipping_rectangle(x + b.thickness, y + b.thickness, w - 2.0f * b.thickness, h - 2.0f * b.thickness);
 		draw_content();
+		draw_overlay();
 	}
 
 	void component::draw_border(
@@ -42,5 +43,16 @@ namespace ag
 		const auto x2{std::max(x1, x1 + w - 2.0f * b.thickness)};
 		const auto y2{std::max(y1, y1 + h - 2.0f * b.thickness)};
 		al_draw_filled_rounded_rectangle(x1, y1, x2, y2, r, r, al_map_rgba(bc.r, bc.g, bc.b, bc.a));
+	}
+
+	void component::draw_overlay() const
+	{
+		const auto oc{overlay_color()};
+		if (!oc.a) return;
+
+		const auto r{overlay_radius()};
+		const auto x1{overlay_x()}, y1{overlay_y()};
+		const auto x2{std::max(x1, x1 + overlay_width())}, y2{std::max(y1, y1 + overlay_height())};
+		al_draw_filled_rounded_rectangle(x1, y1, x2, y2, r, r, al_map_rgba(oc.r, oc.g, oc.b, oc.a));
 	}
 }

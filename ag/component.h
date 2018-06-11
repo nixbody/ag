@@ -49,6 +49,18 @@ namespace ag
 		/* Text label. */
 		prop<std::string_view> text{""};
 
+		/* Overlay position, size and radius. */
+		prop<float>
+			overlay_x{[this] { return x(); }},
+			overlay_y{[this] { return y(); }},
+			overlay_width{[this] { return width(); }},
+			overlay_height{[this] { return height(); }},
+			overlay_radius{[this] { return radius(); }};
+
+		/* Overlay color. */
+		prop<color>
+			overlay_color{0, 0, 0, 0};
+
 		/* Signal which is emitted when one or more mouse axes changed over this component. */
 		signal<const events::mouse_axes_changed &> on_mouse_axes_changed;
 
@@ -147,6 +159,9 @@ namespace ag
 
 		/* Draw this component's background. */
 		virtual void draw_background(float x, float y, float width, float height, float radius, const ag::border &border) const;
+
+		/* Draw a layer over this component. */
+		virtual void draw_overlay() const;
 
 		/* Draw this component's content. */
 		virtual void draw_content() const
