@@ -1,12 +1,30 @@
 #include "ripple.h"
 
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
+#include "../component.h"
 
 namespace ag::animations
 {
-	void ripple::draw_frame() const
+	ripple::ripple(component &component): component_{component}
 	{
-		al_draw_filled_circle(x_, y_, current_radius_, al_map_rgba(color_->r, color_->g, color_->b, color_->a));
+		component_.overlay_width = [this] { return 2.0f * radius_; };
+		component_.overlay_height = [this] { return 2.0f * radius_; };
+		component_.overlay_radius = [this] { return radius_; };
+		component_.overlay_color = {40, 40, 40, 30};
+
+		timer_.on_ticked([this](const auto &) {
+			if ((radius_ += 4.0f) > component_.width()) {
+				radius_ = 0.0f;
+				timer_.pause();
+			}
+		});
+	}
+
+	ripple &ripple::operator()(float x, float y)
+	{
+		component_.overlay_x = [this, x] { return x - radius_; };
+		component_.overlay_y = [this, y] { return y - radius_; };
+		radius_ = 0.0f;
+		timer_.resume();
+		return *this;
 	}
 }

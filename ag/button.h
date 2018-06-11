@@ -4,8 +4,6 @@
 #include "component.h"
 #include "theme.h"
 
-#include <algorithm>
-
 namespace ag
 {
 	/* Button. */
@@ -34,11 +32,7 @@ namespace ag
 		prop<color> bg_color_;
 
 		/* Ripple effect. */
-		animations::ripple ripple_;
-
-		/* Draw this component's content. */
-		void draw_content() const override
-		{ ripple_.draw_frame(); draw_text(text()); }
+		animations::ripple ripple_{*this};
 
 		/* Will be called when the given event was triggered on this component. */
 		void event_triggered(const events::mouse_entered &) override
@@ -50,6 +44,6 @@ namespace ag
 
 		/* Will be called when the given event was triggered on this component. */
 		void event_triggered(const events::mouse_button_pressed &event) override
-		{ ripple_(float(event.x), float(event.y), std::max(width(), height()), bg_color_().brighter(30.0)); }
+		{ ripple_(float(event.x), float(event.y)); }
 	};
 }
