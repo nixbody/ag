@@ -29,7 +29,7 @@ namespace ag
 
 		/* Button radius. */
 		float button_radius() const noexcept override
-		{ return 3.0f; }
+		{ return 4.0f; }
 
 		/* Button padding. */
 		insets button_padding() const noexcept override
