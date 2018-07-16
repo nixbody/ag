@@ -9,10 +9,12 @@ namespace ag
 	display::display(const int width, const int height, const std::string_view title, event_queue &event_queue):
 		native_handle_{[width, height, title] {
 			al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_RESIZABLE);
-			al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
-			al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
+			al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_REQUIRE);
+			al_set_new_display_option(ALLEGRO_SAMPLES, 16, ALLEGRO_SUGGEST);
 			al_set_new_window_title(std::string{title}.c_str());
-			return al_create_display(width, height);
+			auto display = al_create_display(width, height);
+			al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR | ALLEGRO_MIPMAP);
+			return display;
 		}()},
 		event_queue_{event_queue},
 		on_event_occured{event_queue_.on_event_occured([this](const auto &e) { handle_event(e); })}
