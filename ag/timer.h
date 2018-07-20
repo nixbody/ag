@@ -18,6 +18,7 @@ namespace ag
 	public:
 		template <typename Rep, typename Period = typename std::chrono::duration<Rep>::period>
 		using duration = std::chrono::duration<Rep, Period>;
+		using seconds = std::chrono::duration<double>;
 
 		/* Get timer with the given native handle. */
 		static timer &get(const std::any &native_timer_handle);
@@ -28,9 +29,9 @@ namespace ag
 		/* Create a new timer registered with the given event queue. */
 		template <typename Rep, typename Period>
 		constexpr timer(
-			const duration<Rep, Period> &tick_interval, bool paused = false, event_queue &queue = default_event_queue()
-		): timer{duration<double>{tick_interval}.count(), queue}
-		{ if (paused) pause(); }
+			const duration<Rep, Period> &tick_interval, bool started = true, event_queue &queue = default_event_queue()
+		): timer{std::chrono::duration_cast<seconds>(tick_interval).count(), queue}
+		{ if (started) start(); }
 
 		/* Create a new timer registered with the given event queue. */
 		timer(double tick_interval, event_queue &queue = default_event_queue());
@@ -50,11 +51,28 @@ namespace ag
 		/* Disable move-assignment. */
 		timer &operator=(timer &&) = delete;
 
+		/* Start this timer. */
+		timer &start();
+
+		/* Stop this timer. */
+		timer &stop();
+
 		/* Pause this timer. */
 		timer &pause();
 
 		/* Resume this timer. */
 		timer &resume();
+
+		/* Set tick interval of this timer. */
+		template <typename Rep, typename Period>
+		constexpr timer &set_tick_interval(const duration<Rep, Period> &interval)
+		{ return set_tick_interval(std::chrono::duration_cast<seconds>(interval).count()); }
+
+		/* Set tick interval of this timer. */
+		timer &set_tick_interval(double interval);
+
+		/* Get tick interval of this timer. */
+		seconds tick_interval() const;
 
 	private:
 		/* Collection of all currently existing timers. */

@@ -13,6 +13,8 @@ namespace ag
 	/* Component box. */
 	class box : public component
 	{
+		friend ag::display;
+
 	public:
 		/* Inherit component constructors. */
 		using component::component;
@@ -51,9 +53,13 @@ namespace ag
 		/* Components stored inside this box. */
 		std::vector<std::unique_ptr<component>> children_;
 
+		/* Set the display on which this box and its children are drawn. */
+		void set_display(ag::display &display) override
+		{ display_ = &display; for (component &c : children_refs_) c.set_display(display); }
+
 		/* Draw components stored inside this box. */
 		void draw_content() const override
-		{ for (const component &c : children_refs_) c.draw(); }
+		{ draw_text(text()); for (const component &c : children_refs_) c.draw(); }
 
 		/* Get supposed X coordinate of the given child. */
 		virtual float child_x(const component &child) const;
@@ -77,6 +83,7 @@ namespace ag
 	{
 		component &child = children_refs_.emplace_back(*children_.emplace_back(new Component{std::forward<T>(args)...}));
 
+		if (!child.theme) child.theme = theme;
 		if (!child.x) child.x = [this, &child] { return child_x(child); };
 		if (!child.y) child.y = [this, &child] { return child_y(child); };
 		if (!child.width) child.width = [this, &child] { return child_width(child); };
@@ -86,6 +93,7 @@ namespace ag
 		if (!child.text_color) child.text_color = [this] { return text_color(); };
 		if (!child.text_align) child.text_align = [this] { return text_align(); };
 
+		child.display_ = display_;
 		child.parent_ = this;
 		child_added(child);
 

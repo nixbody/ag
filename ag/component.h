@@ -2,6 +2,8 @@
 
 #include "border.h"
 #include "color.h"
+#include "component_theme.h"
+#include "display.h"
 #include "events/keyboard.h"
 #include "events/mouse.h"
 #include "font.h"
@@ -10,6 +12,7 @@
 #include "signal.h"
 
 #include <functional>
+#include <memory>
 #include <string_view>
 #include <utility>
 
@@ -17,6 +20,7 @@ namespace ag
 {
 	class box;
 	class component;
+
 	using component_ref = std::reference_wrapper<component>;
 
 	/* Base class for UI components. */
@@ -25,6 +29,9 @@ namespace ag
 		friend box;
 
 	public:
+		/* Theme used by this component. */
+		prop<std::shared_ptr<component_theme>> theme;
+
 		/* Tells whether or not this component is supposed to be visible and/or is focusable. */
 		prop<bool> visible{true}, focusable{true};
 
@@ -106,12 +113,20 @@ namespace ag
 		/* Draw this component on the screen. */
 		void draw() const;
 
+		/* Tell whether or not this component is attached to a display. */
+		bool has_display() const noexcept
+		{ return display_; }
+
+		/* Get the display on which this component is drawn. */
+		display &display() noexcept
+		{ return *display_; }
+
 		/* Tell whether or not this component has a parent. */
-		constexpr bool has_parent() const noexcept
+		bool has_parent() const noexcept
 		{ return parent_; }
 
 		/* Get parent of this component. */
-		constexpr const box &parent() const noexcept
+		box &parent() noexcept
 		{ return *parent_; }
 
 		/* Trigger the given event on this component. */
@@ -147,12 +162,24 @@ namespace ag
 		{ return trigger(on_character_typed, event); }
 
 	protected:
+		/* Call the given target and apply current scale factor on all the arguments. */
+		template <typename U = float, typename Invocable, typename ... T>
+		auto scaled(Invocable &&target, T && ... args) const
+		{ return target(U(std::forward<T>(args) * (display_ ? display_->scale_factor() : 1.0f))...); }
+
 		/* Draw the given text onto this component. */
 		inline void draw_text(std::string_view text) const;
 
 	private:
+		/* Display on which this component is drawn. */
+		ag::display *display_{nullptr};
+
 		/* Parent of this component. */
-		const box *parent_{nullptr};
+		box *parent_{nullptr};
+
+		/* Attach this component to the given display. */
+		virtual void set_display(ag::display &display)
+		{ display_ = &display; }
 
 		/* Draw this component's border. */
 		virtual void draw_border(float x, float y, float width, float height, float radius, const ag::border &border) const;

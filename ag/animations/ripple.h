@@ -17,12 +17,15 @@ namespace ag::animations
 
 	private:
 		/* Animation timer. */
-		timer timer_{10.0ms, true};
+		timer timer_{4.0ms, false};
 
 		/* Component being animated. */
 		component &component_;
 
 		/* Current radius. */
 		float radius_{0.0f};
+
+		/* Tells whether or not this animation is running. */
+		bool running_{false};
 	};
 }

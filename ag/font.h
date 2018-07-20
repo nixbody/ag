@@ -18,11 +18,14 @@ namespace ag
 
 		/* Create a new font with the given size from the given resource. */
 		template <auto ArraySize>
-		constexpr font(std::array<std::byte, ArraySize> &resource, int size): font{resource.data(), resource.size(), size}
+		constexpr font(std::array<std::byte, ArraySize> &resource, float size) noexcept:
+			font{resource.data(), ArraySize, size}
 		{}
 
 		/* Create a new font with the given size from the given resource. */
-		font(void *resource, std::size_t resource_size, int size);
+		constexpr font(std::byte *resource, std::size_t resource_size, float size) noexcept:
+			resource_{resource}, resource_size_{resource_size}, size_{size}
+		{}
 
 		/* Get usual line height specified by this font. */
 		float line_height() const;
@@ -42,7 +45,24 @@ namespace ag
 		) const;
 
 	private:
+		/* Font resource. */
+		std::byte *const resource_;
+
+		/* Font resource size. */
+		const std::size_t resource_size_;
+
+		/* Size of this font. */
+		const float size_;
+
 		/* Handle to a native underlaying (implmentation specific) font resource. */
-		std::any native_handle_;
+		mutable std::any native_handle_;
+
+		/* Load this font with the given size. */
+		std::any load(float size) const;
+
+		/* Get handle to this font's native resource. */
+		template <typename T>
+		T get() const
+		{ return std::any_cast<T>(!native_handle_.has_value() ? native_handle_ = load(size_) : native_handle_); }
 	};
 }

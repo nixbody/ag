@@ -12,10 +12,10 @@ namespace ag
 
 		const auto x{this->x()}, y{this->y()}, r{radius()};
 		const auto b{border()};
-		al_set_clipping_rectangle(x, y, w, h);
+		scaled<int>(al_set_clipping_rectangle, x, y, w, h);
 		draw_border(x, y, w, h, r, b);
 		draw_background(x, y, w, h, r, b);
-		al_set_clipping_rectangle(x + b.thickness, y + b.thickness, w - 2.0f * b.thickness, h - 2.0f * b.thickness);
+		scaled<int>(al_set_clipping_rectangle, x + b.thickness, y + b.thickness, w - 2.0f * b.thickness, h - 2.0f * b.thickness);
 		draw_content();
 		draw_overlay();
 	}
