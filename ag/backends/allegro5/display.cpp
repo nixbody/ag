@@ -41,6 +41,7 @@ namespace ag
 		on_event_occured{event_queue_.on_event_occured([this](const auto &e) { handle_event(e); })}
 	{
 		scene_.set_display(*this);
+		scene_.theme = [] { return component::default_theme; };
 		scene_.x = scene_.y = 0.0f;
 		scene_.width = [this] { return width_; };
 		scene_.height = [this] { return height_; };

@@ -2,7 +2,6 @@
 
 #include "border.h"
 #include "color.h"
-#include "component_theme.h"
 #include "display.h"
 #include "events/keyboard.h"
 #include "events/mouse.h"
@@ -10,6 +9,7 @@
 #include "insets.h"
 #include "prop.h"
 #include "signal.h"
+#include "themes/material_theme.h"
 
 #include <chrono>
 #include <functional>
@@ -34,8 +34,11 @@ namespace ag
 		/* Maximum interval between two clicks to be treated as a double click. */
 		static inline std::chrono::duration<double> double_click_interval{400.0ms};
 
+		/* Default component theme. */
+		static inline std::shared_ptr<component_theme> default_theme{new material_theme};
+
 		/* Theme used by this component. */
-		prop<std::shared_ptr<component_theme>> theme;
+		prop<decltype(default_theme)> theme;
 
 		/* Tells whether or not this component is supposed to be visible and/or is focusable. */
 		prop<bool> visible{true}, focusable{true};
