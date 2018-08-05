@@ -129,6 +129,10 @@ namespace ag
 		display &display() noexcept
 		{ return *display_; }
 
+		/* Get the scene on which this component is shown. */
+		box &scene() noexcept
+		{ return display_->scene(); }
+
 		/* Tell whether or not this component has a parent. */
 		bool has_parent() const noexcept
 		{ return parent_; }
