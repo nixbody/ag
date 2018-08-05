@@ -11,6 +11,7 @@
 #include "prop.h"
 #include "signal.h"
 
+#include <chrono>
 #include <functional>
 #include <memory>
 #include <string_view>
@@ -22,6 +23,7 @@ namespace ag
 	class component;
 
 	using component_ref = std::reference_wrapper<component>;
+	using namespace std::chrono_literals;
 
 	/* Base class for UI components. */
 	class component
@@ -29,6 +31,9 @@ namespace ag
 		friend box;
 
 	public:
+		/* Maximum interval between two clicks to be treated as a double click. */
+		static inline std::chrono::duration<double> double_click_interval{400.0ms};
+
 		/* Theme used by this component. */
 		prop<std::shared_ptr<component_theme>> theme;
 
@@ -82,6 +87,9 @@ namespace ag
 
 		/* Signal which is emitted when this component was clicked. */
 		signal<const events::mouse_clicked &> on_clicked;
+
+		/* Signal which is emitted when this component was double clicked. */
+		signal<const events::mouse_clicked &> on_double_clicked;
 
 		/* Signal which is emitted when this component is focused and a key was pressed. */
 		signal<const events::key_pressed &> on_key_pressed;
@@ -147,7 +155,7 @@ namespace ag
 
 		/* Trigger the given event on this component. */
 		component &trigger(const events::mouse_clicked &event)
-		{ return trigger(on_clicked, event); }
+		{ return trigger_mouse_clicked(event); }
 
 		/* Trigger the given event on this component. */
 		component &trigger(const events::key_pressed &event)
@@ -171,11 +179,20 @@ namespace ag
 		inline void draw_text(std::string_view text) const;
 
 	private:
+		/* Steady clock. */
+		using clock = std::chrono::steady_clock;
+
 		/* Display on which this component is drawn. */
 		ag::display *display_{nullptr};
 
 		/* Parent of this component. */
 		box *parent_{nullptr};
+
+		/* When this component was clicked. */
+		decltype(clock::now()) clicked_at_;
+
+		/* Mouse button which was pressed when this component was clicked. */
+		unsigned clicked_button_{0};
 
 		/* Attach this component to the given display. */
 		virtual void set_display(ag::display &display)
@@ -233,6 +250,15 @@ namespace ag
 			event_triggered(std::forward<Event>(event));
 			signal.emit(std::forward<Event>(event));
 			return *this;
+		}
+
+		/* Trigger a mouse click on this component and then emit appropriate signal. */
+		component &trigger_mouse_clicked(const events::mouse_clicked &event)
+		{
+			const bool db_click{clicked_button_ == event.button && (clock::now() - clicked_at_) <= double_click_interval};
+			clicked_at_ = clock::now();
+			clicked_button_ = event.button;
+			return trigger(db_click ? on_double_clicked : on_clicked, event);
 		}
 	};
 
