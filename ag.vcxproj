@@ -20,32 +20,32 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{E6463888-BE50-4049-8910-86C993CD50B1}</ProjectGuid>
+    <ProjectGuid>{426F2B42-6ED2-47B0-8EAC-DF09C4F362E6}</ProjectGuid>
     <RootNamespace>ag</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -97,7 +97,35 @@
     <Allegro_AddonVideo>true</Allegro_AddonVideo>
     <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPhysfs>true</Allegro_AddonPhysfs>
+    <Allegro_AddonDialog>true</Allegro_AddonDialog>
+    <Allegro_AddonMemfile>true</Allegro_AddonMemfile>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_AddonVideo>true</Allegro_AddonVideo>
+    <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPhysfs>true</Allegro_AddonPhysfs>
+    <Allegro_AddonDialog>true</Allegro_AddonDialog>
+    <Allegro_AddonMemfile>true</Allegro_AddonMemfile>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_AddonVideo>true</Allegro_AddonVideo>
+    <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -106,12 +134,13 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,7 +152,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -138,6 +166,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -145,40 +174,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ag\animations\ripple.cpp" />
-    <ClCompile Include="ag\backends\allegro5\component.cpp" />
-    <ClCompile Include="ag\backends\allegro5\display.cpp" />
-    <ClCompile Include="ag\backends\allegro5\event_queue.cpp" />
-    <ClCompile Include="ag\backends\allegro5\font.cpp" />
-    <ClCompile Include="ag\backends\allegro5\key.cpp" />
-    <ClCompile Include="ag\backends\allegro5\start.cpp" />
-    <ClCompile Include="ag\box.cpp" />
-    <ClCompile Include="ag\h_box.cpp" />
-    <ClCompile Include="ag\resources\material_icons_regular_woff.cpp" />
-    <ClCompile Include="ag\resources\roboto_bold_woff.cpp" />
-    <ClCompile Include="ag\resources\roboto_italic_woff.cpp" />
-    <ClCompile Include="ag\resources\roboto_light_woff.cpp" />
-    <ClCompile Include="ag\resources\roboto_medium_woff.cpp" />
-    <ClCompile Include="ag\resources\roboto_regular_woff.cpp" />
-    <ClCompile Include="ag\timer.cpp" />
-    <ClCompile Include="ag\v_box.cpp" />
-    <ClCompile Include="tests\border_tests.cpp" />
-    <ClCompile Include="tests\box_tests.cpp" />
-    <ClCompile Include="tests\color_tests.cpp" />
-    <ClCompile Include="tests\h_box_tests.cpp" />
-    <ClCompile Include="tests\main.cpp" />
-    <ClCompile Include="tests\prop_tests.cpp" />
-    <ClCompile Include="tests\region_tests.cpp" />
-    <ClCompile Include="tests\signal_tests.cpp" />
-    <ClCompile Include="tests\v_box_tests.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ag\animations\ripple.h" />
+    <ClInclude Include="ag\backends\allegro5.h" />
+    <ClInclude Include="ag\backends\default.h" />
     <ClInclude Include="ag\border.h" />
     <ClInclude Include="ag\box.h" />
     <ClInclude Include="ag\button.h" />
     <ClInclude Include="ag\color.h" />
     <ClInclude Include="ag\component.h" />
+    <ClInclude Include="ag\component_theme.h" />
     <ClInclude Include="ag\display.h" />
     <ClInclude Include="ag\events\keyboard.h" />
     <ClInclude Include="ag\events\mouse.h" />
@@ -192,16 +196,33 @@
     <ClInclude Include="ag\prop.h" />
     <ClInclude Include="ag\region.h" />
     <ClInclude Include="ag\resources.h" />
-    <ClInclude Include="ag\start.h" />
     <ClInclude Include="ag\signal.h" />
-    <ClInclude Include="ag\theme.h" />
+    <ClInclude Include="ag\start.h" />
+    <ClInclude Include="ag\themes\material_theme.h" />
     <ClInclude Include="ag\timer.h" />
     <ClInclude Include="ag\type_traits.h" />
     <ClInclude Include="ag\v_box.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
-    <None Include=".gitignore" />
+    <ClCompile Include="ag\animations\ripple.cpp" />
+    <ClCompile Include="ag\backends\allegro5\component.cpp" />
+    <ClCompile Include="ag\backends\allegro5\display.cpp" />
+    <ClCompile Include="ag\backends\allegro5\event_queue.cpp" />
+    <ClCompile Include="ag\backends\allegro5\font.cpp" />
+    <ClCompile Include="ag\backends\allegro5\key.cpp" />
+    <ClCompile Include="ag\backends\allegro5\start.cpp" />
+    <ClCompile Include="ag\backends\allegro5\timer.cpp" />
+    <ClCompile Include="ag\box.cpp" />
+    <ClCompile Include="ag\h_box.cpp" />
+    <ClCompile Include="ag\resources\material_icons_regular_woff.cpp" />
+    <ClCompile Include="ag\resources\roboto_bold_woff.cpp" />
+    <ClCompile Include="ag\resources\roboto_italic_woff.cpp" />
+    <ClCompile Include="ag\resources\roboto_light_woff.cpp" />
+    <ClCompile Include="ag\resources\roboto_medium_woff.cpp" />
+    <ClCompile Include="ag\resources\roboto_regular_woff.cpp" />
+    <ClCompile Include="ag\v_box.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

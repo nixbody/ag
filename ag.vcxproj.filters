@@ -15,6 +15,104 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ag\backends\allegro5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\border.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\component_theme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\backends\default.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\event_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\h_box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\insets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\events\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\themes\material_theme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\events\mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\prop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\region.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\animations\ripple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\signal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\events\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\type_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ag\v_box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ag\box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\h_box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\v_box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\animations\ripple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ag\backends\allegro5\component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -25,6 +123,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ag\backends\allegro5\font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\start.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ag\resources\material_icons_regular_woff.cpp">
@@ -45,135 +152,8 @@
     <ClCompile Include="ag\resources\roboto_regular_woff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ag\box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\h_box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\v_box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\color_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\border_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\box_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\prop_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\signal_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\h_box_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\v_box_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\region_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\backends\allegro5\key.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\backends\allegro5\start.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ag\animations\ripple.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ag\events\mouse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\events\timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\border.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\event_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\h_box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\insets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\label.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\signal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\theme.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\v_box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\prop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\type_traits.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\region.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\key.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\events\keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\start.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ag\animations\ripple.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include=".gitignore" />
-    <None Include=".editorconfig" />
   </ItemGroup>
 </Project>
