@@ -99,6 +99,9 @@
     <ClInclude Include="ag\v_box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ag\slider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ag\box.cpp">
@@ -150,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ag\resources\roboto_regular_woff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ag\backends\allegro5\slider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
