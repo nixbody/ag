@@ -79,6 +79,9 @@ namespace ag
 		/* Signal which is emitted when one or more mouse axes changed over this component. */
 		signal<const events::mouse_axes_changed &> on_mouse_axes_changed;
 
+		/* Signal which is emitted when mouse is dragged over this component. */
+		signal<const events::mouse_dragged &> on_mouse_dragged;
+
 		/* Signal which is emitted when mouse cursor entered this component. */
 		signal<const events::mouse_entered &> on_mouse_entered;
 
@@ -147,6 +150,10 @@ namespace ag
 		/* Trigger the given event on this component. */
 		component &trigger(const events::mouse_axes_changed &event)
 		{ return trigger(on_mouse_axes_changed, event); }
+
+		/* Trigger the given event on this component. */
+		component &trigger(const events::mouse_dragged &event)
+		{ return trigger(on_mouse_dragged, event); }
 
 		/* Trigger the given event on this component. */
 		component &trigger(const events::mouse_entered &event)
@@ -220,6 +227,10 @@ namespace ag
 
 		/* Will be called when the given event was triggered on this component. */
 		virtual void event_triggered(const events::mouse_axes_changed &)
+		{}
+
+		/* Will be called when the given event was triggered on this component. */
+		virtual void event_triggered(const events::mouse_dragged &)
 		{}
 
 		/* Will be called when the given event was triggered on this component. */

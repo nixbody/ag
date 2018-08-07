@@ -16,6 +16,19 @@ namespace ag::events
 		component &target;
 	};
 
+	/* Triggered when mouse is dragged. */
+	struct mouse_dragged final
+	{
+		/* Mouse coordinates deltas. */
+		struct { const int x, y, z, w; } const deltas;
+
+		/* Mouse coordinates. */
+		const int x, y, z, w;
+
+		/* Target component. */
+		component &target;
+	};
+
 	/* Triggered when mouse cursor entered the target component. */
 	struct mouse_entered final
 	{

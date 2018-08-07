@@ -259,6 +259,10 @@ namespace ag
 		if (!hidden_) {
 			const auto e{mouse_event(native_event, scale_factor_)};
 			auto &t{acquired_component_ ? *acquired_component_ : scene_.child_at_pos(e.x, e.y).value_or(scene_).get()};
+			ALLEGRO_MOUSE_STATE state;
+			al_get_mouse_state(&state);
+			t.trigger(events::mouse_axes_changed{e.dx, e.dy, e.dz, e.dw, e.x, e.y, e.z, e.w, t});
+			if (state.buttons & 1) t.trigger(events::mouse_dragged{e.dx, e.dy, e.dz, e.dw, e.x, e.y, e.z, e.w, t});
 			if (&t != last_event_target_) {
 				if (last_event_target_) last_event_target_
 					->trigger(events::mouse_left{e.dx, e.dy, e.dz, e.dw, e.x, e.y, e.z, e.w, *last_event_target_});
@@ -266,7 +270,6 @@ namespace ag
 				t.trigger(events::mouse_entered{e.dx, e.dy, e.dz, e.dw, e.x, e.y, e.z, e.w, t});
 				last_event_target_ = &t;
 			}
-			t.trigger(events::mouse_axes_changed{e.dx, e.dy, e.dz, e.dw, e.x, e.y, e.z, e.w, t});
 		}
 	}
 
