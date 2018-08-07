@@ -53,6 +53,9 @@ namespace ag::events
 
 		/* Target component. */
 		component &target;
+
+		/* Pressed button identifier. */
+		const bool button_primary{button == 1}, button_secondary{button == 2};
 	};
 
 	/* Triggered when the target component is clicked. */
@@ -66,5 +69,8 @@ namespace ag::events
 
 		/* Target component. */
 		component &target;
+
+		/* Pressed button identifier. */
+		const bool button_primary{button == 1}, button_secondary{button == 2};
 	};
 }
