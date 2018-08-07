@@ -157,7 +157,7 @@ namespace ag
 		float x_{0.0f}, y_{0.0f}, width_{0.0}, height_{0.0}, scale_factor_{0.0};
 
 		/* Various properties of this display. */
-		bool resizable_{true}, frameless_{false}, fullscreen_{false}, maximized_{false}, minimized_{false}, hidden_{false};
+		bool resizable_{true}, frameless_{false}, fullscreen_{false}, maximized_{false}, minimized_{false}, hidden_{true};
 
 		/* Tells whether or not drawing of this display is paused. */
 		bool drawing_paused_{false};
