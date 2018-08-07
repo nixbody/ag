@@ -13,7 +13,7 @@ namespace ag
 	using namespace std::chrono_literals;
 
 	/* Timer ticking at constant rate. */
-	class timer final
+	class timer
 	{
 	public:
 		template <typename Rep, typename Period = typename std::chrono::duration<Rep>::period>
@@ -43,7 +43,7 @@ namespace ag
 		timer(timer &&) = delete;
 
 		/* Destroy this timer and unregister it from its event queue. */
-		~timer() noexcept;
+		virtual ~timer() noexcept;
 
 		/* Disable copy-assignment. */
 		timer &operator=(const timer &) = delete;

@@ -141,6 +141,9 @@ namespace ag
 		display &redraw();
 
 	private:
+		/* Ticking till another frame is drawn. */
+		struct redraw_timer : timer { using timer::timer; } redraw_timer_{33.0ms, false};
+
 		/* Handle to the native underlaying (implementation specific) display. */
 		std::any native_handle_;
 
@@ -149,9 +152,6 @@ namespace ag
 
 		/* Connection between this display's slot and the associated event queue's signal. */
 		const decltype(event_queue_.on_event_occured)::connection on_event_occured;
-
-		/* Ticking till another frame is drawn. */
-		timer redraw_timer_{33ms, false};
 
 		/* Position, dimensions and scale factor of this display. */
 		float x_{0.0f}, y_{0.0f}, width_{0.0}, height_{0.0}, scale_factor_{0.0};

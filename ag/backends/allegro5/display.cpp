@@ -222,13 +222,11 @@ namespace ag
 	{
 		if (hidden_) return false;
 
-		auto *const target{event_target_display(native_event)};
-		if (!target) return true;
-
 		const auto &e{std::any_cast<const ALLEGRO_EVENT &>(native_event)};
-		if (e.type == ALLEGRO_EVENT_TIMER && &timer::get(e.timer.source) == &redraw_timer_) return false;
+		if (e.type == ALLEGRO_EVENT_TIMER && dynamic_cast<redraw_timer *>(&timer::get(e.timer.source))) return false;
 
-		return target == get<ALLEGRO_DISPLAY *>();
+		auto *const target{event_target_display(native_event)};
+		return !target || target == get<ALLEGRO_DISPLAY *>();
 	}
 
 	void display::handle_event(const std::any &native_event)
