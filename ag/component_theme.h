@@ -54,5 +54,38 @@ namespace ag
 
 		/* Button secondary color. */
 		prop<color> button_secondary_color;
+
+		/* Slider track color. */
+		prop<color> slider_track_color;
+
+		/* Slider progress color. */
+		prop<color> slider_progress_color;
+
+		/* Slider thumb color. */
+		prop<color> slider_thumb_color;
+
+		/* Slider track border. */
+		prop<border> slider_track_border;
+
+		/* Slider thumb border. */
+		prop<border> slider_thumb_border;
+
+		/* Slider track thickness. */
+		prop<float> slider_track_thickness;
+
+		/* Slider track radius. */
+		prop<float> slider_track_radius;
+
+		/* Slider thumb width. */
+		prop<float> slider_thumb_width;
+
+		/* Slider thumb height. */
+		prop<float> slider_thumb_height;
+
+		/* Slider thumb radius. */
+		prop<float> slider_thumb_radius;
+
+		/* Tells whether or not slider thumbs may overlap slider track. */
+		prop<bool> slider_thumb_overlaps;
 	};
 }
