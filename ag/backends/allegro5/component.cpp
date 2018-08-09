@@ -1,10 +1,35 @@
-#include "../../component.h"
+#include "../../box.h"
 
 #include <algorithm>
 #include <allegro5/allegro_primitives.h>
+#include <cmath>
 
 namespace ag
 {
+	bool component::clip(const bool clip_border) const
+	{
+		auto x{this->x()}, y{this->y()}, w{width()}, h{height()};
+		if (clip_border) {
+			const auto bt{border().thickness};
+			x += bt; y += bt; w -= 2.0f * bt; h -= 2.0f * bt;
+		}
+		if (parent_) {
+			auto px{parent_->x()}, py{parent_->y()}, pw{parent_->width()}, ph{parent_->height()};
+			if (clip_border) {
+				const auto bt{parent_->border().thickness};
+				px += bt; py += bt; pw -= 2.0f * bt; ph -= 2.0f * bt;
+			}
+			if (x + w < px || y + h < py || x > px + pw || y > py + ph) return false;
+			if (x < px) { x = px; w -= px - x; }
+			if (x + w > px + pw) w -= x + w - px - pw;
+			if (y < py) { y = py; h -= py - y; }
+			if (y + h > py + ph) h -= y + h - py - ph;
+		}
+		const auto sf{display_ ? display_->scale_factor() : 1.0f};
+		al_set_clipping_rectangle(std::floor(x * sf), std::floor(y * sf), std::ceil(w * sf), std::ceil(h * sf));
+		return true;
+	}
+
 	void component::draw() const
 	{
 		const auto w{width()}, h{height()};
@@ -12,12 +37,9 @@ namespace ag
 
 		const auto x{this->x()}, y{this->y()}, r{radius()};
 		const auto b{border()};
-		scaled<int>(al_set_clipping_rectangle, x, y, w, h);
-		draw_border(x, y, w, h, r, b);
-		draw_background(x, y, w, h, r, b);
-		scaled<int>(al_set_clipping_rectangle, x + b.thickness, y + b.thickness, w - 2.0f * b.thickness, h - 2.0f * b.thickness);
-		draw_content();
-		draw_overlay();
+		if (clip()) draw_border(x, y, w, h, r, b);
+		if (clip(true)) { draw_background(x, y, w, h, r, b); draw_content(); }
+		if (clip()) draw_overlay();
 	}
 
 	void component::draw_border(

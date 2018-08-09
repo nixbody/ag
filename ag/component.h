@@ -184,11 +184,6 @@ namespace ag
 		{ return trigger(on_character_typed, event); }
 
 	protected:
-		/* Call the given target and apply current scale factor on all the arguments. */
-		template <typename U = float, typename Invocable, typename ... T>
-		auto scaled(Invocable &&target, T && ... args) const
-		{ return target(U(std::forward<T>(args) * (display_ ? display_->scale_factor() : 1.0f))...); }
-
 		/* Draw the given text onto this component. */
 		inline void draw_text(std::string_view text) const;
 
@@ -207,6 +202,9 @@ namespace ag
 
 		/* Mouse button which was pressed when this component was clicked. */
 		unsigned clicked_button_{0};
+
+		/* Clip the drawing area to this component. */
+		bool clip(bool clip_border = false) const;
 
 		/* Attach this component to the given display. */
 		virtual void set_display(ag::display &display)
