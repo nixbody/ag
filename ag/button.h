@@ -24,7 +24,7 @@ namespace ag
 			width = [this] { return font().text_width(text()) + padding().left + padding().right + 2.0f * border().thickness; };
 			height = [this] { return font().line_height() + padding().top + padding().bottom + 2.0f * border().thickness; };
 			padding = [this] { return theme()->button_padding(); };
-			border = [this] { return ag::border(type() == type::primary, {0, 0, 0, 30}); };
+			border = [this] { return theme()->button_border(); };
 			radius = [this] { return theme()->button_radius(); };
 			bg_color = [this] { return pick_color(type() == type::primary); };
 			text_color = [this] { return pick_color(type() == type::secondary); };

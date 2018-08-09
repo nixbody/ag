@@ -46,6 +46,9 @@ namespace ag
 		/* Button padding. */
 		prop<insets> button_padding;
 
+		/* Button border. */
+		prop<border> button_border;
+
 		/* Button font. */
 		prop<font> button_font;
 
