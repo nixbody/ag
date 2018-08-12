@@ -26,7 +26,7 @@ namespace ag
 			if (y + h > py + ph) h -= y + h - py - ph;
 		}
 		const auto sf{display_ ? display_->scale_factor() : 1.0f};
-		al_set_clipping_rectangle(std::floor(x * sf), std::floor(y * sf), std::ceil(w * sf), std::ceil(h * sf));
+		al_set_clipping_rectangle(x * sf, y * sf, w * sf + 1.0f, h * sf + 1.0f);
 		return true;
 	}
 
