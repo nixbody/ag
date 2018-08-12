@@ -7,10 +7,10 @@ namespace ag
 		auto content_height{0.0f}, y{this->y()};
 
 		for (const component &c : children()) {
-			const auto cm{child.margin()};
+			const auto cm{c.margin()};
 
 			if (&c == &child) y += content_height + cm.top;
-			if (child.visible()) content_height += child.height() + cm.top + cm.bottom;
+			if (c.visible()) content_height += c.height() + cm.top + cm.bottom;
 		}
 
 		switch (align()) {

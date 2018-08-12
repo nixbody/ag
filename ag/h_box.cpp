@@ -7,10 +7,10 @@ namespace ag
 		auto content_width{0.0f}, x{this->x()};
 
 		for (const component &c : children()) {
-			const auto cm{child.margin()};
+			const auto cm{c.margin()};
 
 			if (&c == &child) x += content_width + cm.left;
-			if (child.visible()) content_width += child.width() + cm.left + cm.right;
+			if (c.visible()) content_width += c.width() + cm.left + cm.right;
 		}
 
 		switch (align()) {
