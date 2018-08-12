@@ -12,7 +12,7 @@ namespace ag::animations
 		component_.overlay_color = {40, 40, 40, 30};
 
 		timer_.on_ticked([this](const auto &) {
-			if (running_ && (radius_ += 1.0f) > component_.width()) {
+			if (running_ && (radius_ += 0.1f + 0.0125f * component_.width()) > component_.width()) {
 				timer_.stop();
 				radius_ = 0.0f;
 				running_ = false;
