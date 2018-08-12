@@ -12,9 +12,6 @@ namespace ag
 		/* Button type. */
 		enum class type {primary, secondary};
 
-		/* Inherit component constructors. */
-		using component::component;
-
 		/* Type of this button. */
 		prop<type> type{type::primary};
 
