@@ -80,7 +80,7 @@ namespace ag
 	{
 		component &child = children_refs_.emplace_back(*children_.emplace_back(new Component{std::forward<T>(args)...}));
 
-		if (!child.theme) child.theme = theme;
+		if (!child.theme) child.theme = [this] { return theme(); };
 		if (!child.x) child.x = [this, &child] { return child_x(child); };
 		if (!child.y) child.y = [this, &child] { return child_y(child); };
 		if (!child.width) child.width = [this, &child] { return child_width(child); };
@@ -90,7 +90,7 @@ namespace ag
 		if (!child.text_color) child.text_color = [this] { return text_color(); };
 		if (!child.text_align) child.text_align = [this] { return text_align(); };
 
-		child.display_ = display_;
+		child.set_display(*display_);
 		child.parent_ = this;
 		child_added(child);
 
