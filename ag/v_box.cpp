@@ -2,15 +2,15 @@
 
 namespace ag
 {
-	float v_box::child_y(const component &child) const
+	float v_box::first_child_y() const
 	{
-		auto content_height{0.0f}, y{this->y()};
+		auto content_height{0.0f}, y{this->y() + children().front().get().margin().top};
 
 		for (const component &c : children()) {
-			const auto cm{c.margin()};
-
-			if (&c == &child) y += content_height + cm.top;
-			if (c.visible()) content_height += c.height() + cm.top + cm.bottom;
+			if (c.visible()) {
+				const auto cm{c.margin()};
+				content_height += c.height() + cm.top + cm.bottom;
+			}
 		}
 
 		switch (align()) {
@@ -25,6 +25,16 @@ namespace ag
 				return y + height() - content_height - border().thickness - padding().bottom;
 
 			default: return y + border().thickness + padding().top;
+		}
+	}
+
+	float v_box::child_y(const component &child) const
+	{
+		if (const auto i{child_index(child)}; i > 0) {
+			const component &prev = children()[i - 1], &c = children()[i];
+			return prev.y() + prev.height() + prev.margin().bottom + c.margin().top;
+		} else {
+			return first_child_y();
 		}
 	}
 }
