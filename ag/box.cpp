@@ -1,5 +1,4 @@
 #include "box.h"
-#include "region.h"
 
 #include <algorithm>
 
@@ -22,6 +21,20 @@ namespace ag
 		}
 
 		return child ? std::optional<component_ref>{*child} : std::nullopt;
+	}
+
+	const region &box::child_region(const component &child) const
+	{
+		const auto it{children_regions_cache_.find(&child)};
+		return it == children_regions_cache_.cend()
+			? children_regions_cache_.try_emplace(
+				&child,
+				child_x(child),
+				child_y(child),
+				child_width(child),
+				child_height(child)
+			).first->second
+			: it->second;
 	}
 
 	float box::child_x(const component &child) const

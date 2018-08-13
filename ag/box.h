@@ -1,10 +1,12 @@
 #pragma once
 
 #include "component.h"
+#include "region.h"
 #include "type_traits.h"
 
 #include <memory>
 #include <optional>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -43,12 +45,23 @@ namespace ag
 		constexpr const std::vector<component_ref> &children() const noexcept
 		{ return children_refs_; }
 
+	protected:
+		/* Get index of the given child. */
+		std::size_t child_index(const component &child) const
+		{ return children_indices_.at(&child); }
+
 	private:
+		/* Children regions cache. */
+		static inline std::unordered_map<const component *, const region> children_regions_cache_;
+
 		/* References to components stored inside this box. */
 		std::vector<component_ref> children_refs_;
 
 		/* Components stored inside this box. */
 		std::vector<std::unique_ptr<component>> children_;
+
+		/* Children indices lookup table. */
+		std::unordered_map<const component *, std::size_t> children_indices_;
 
 		/* Set the display on which this box and its children are drawn. */
 		void set_display(ag::display &display) override
@@ -57,6 +70,9 @@ namespace ag
 		/* Draw components stored inside this box. */
 		void draw_content() const override
 		{ draw_text(text()); for (const component &c : children_refs_) c.draw(); }
+
+		/* Get the region occupied by the given child. */
+		const region &child_region(const component &child) const;
 
 		/* Get supposed X coordinate of the given child. */
 		virtual float child_x(const component &child) const;
@@ -79,12 +95,13 @@ namespace ag
 	box &box::add(T && ... args)
 	{
 		component &child = children_refs_.emplace_back(*children_.emplace_back(new Component{std::forward<T>(args)...}));
+		children_indices_.try_emplace(&child, children_.size() - 1);
 
 		if (!child.theme) child.theme = [this] { return theme(); };
-		if (!child.x) child.x = [this, &child] { return child_x(child); };
-		if (!child.y) child.y = [this, &child] { return child_y(child); };
-		if (!child.width) child.width = [this, &child] { return child_width(child); };
-		if (!child.height) child.height = [this, &child] { return child_height(child); };
+		if (!child.x) child.x = [this, &child] { return child_region(child).x; };
+		if (!child.y) child.y = [this, &child] { return child_region(child).y; };
+		if (!child.width) child.width = [this, &child] { return child_region(child).width; };
+		if (!child.height) child.height = [this, &child] { return child_region(child).height; };
 		if (!child.line_height) child.line_height = [this] { return line_height(); };
 		if (!child.font) child.font = [this] { return font(); };
 		if (!child.text_color) child.text_color = [this] { return text_color(); };
