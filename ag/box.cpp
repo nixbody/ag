@@ -4,6 +4,8 @@
 
 namespace ag
 {
+	std::unordered_map<const component *, const region> box::region_cache_;
+
 	std::optional<component_ref> box::child_at_pos(const float x, const float y) const
 	{
 		if (!visible() || !region{*this}.contains(x, y)) return std::nullopt;
@@ -25,9 +27,14 @@ namespace ag
 
 	const region &box::child_region(const component &child) const
 	{
-		const auto it{children_regions_cache_.find(&child)};
-		return it == children_regions_cache_.cend()
-			? children_regions_cache_.try_emplace(
+		if (align_ != align()) {
+			clear_region_cache();
+			align_ = align();
+		}
+
+		const auto it{region_cache_.find(&child)};
+		return it == region_cache_.cend()
+			? region_cache_.try_emplace(
 				&child,
 				child_x(child),
 				child_y(child),

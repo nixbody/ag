@@ -191,7 +191,7 @@ namespace ag
 	display &display::redraw()
 	{
 		if (!hidden_ && !drawing_paused_) {
-			box::children_regions_cache_.clear();
+			box::region_cache_.clear();
 			clear().scene_.draw();
 			al_flip_display();
 		}

@@ -29,6 +29,22 @@ namespace ag
 		box()
 		{ focusable = false; }
 
+		/* Erase this box and its children from the region cache. */
+		~box() override
+		{ clear_region_cache(); }
+
+		/* Prevents copying. */
+		box(const box &) = delete;
+
+		/* Prevents moving. */
+		box(box &&) = delete;
+
+		/* Prevents copy-assignment. */
+		box &operator=(const box &) = delete;
+
+		/* Prevents move-assignment. */
+		box &operator=(box &&) = delete;
+
 		/* Get topmost visible child at the given position. */
 		std::optional<component_ref> child_at_pos(float x, float y) const;
 
@@ -52,7 +68,7 @@ namespace ag
 
 	private:
 		/* Children regions cache. */
-		static inline std::unordered_map<const component *, const region> children_regions_cache_;
+		static std::unordered_map<const component *, const region> region_cache_;
 
 		/* References to components stored inside this box. */
 		std::vector<component_ref> children_refs_;
@@ -63,6 +79,9 @@ namespace ag
 		/* Children indices lookup table. */
 		std::unordered_map<const component *, std::size_t> children_indices_;
 
+		/* Current alignment of components in this box. */
+		mutable alignment align_{align()};
+
 		/* Set the display on which this box and its children are drawn. */
 		void set_display(ag::display &display) override
 		{ display_ = &display; for (component &c : children_refs_) c.set_display(display); }
@@ -70,6 +89,10 @@ namespace ag
 		/* Draw components stored inside this box. */
 		void draw_content() const override
 		{ draw_text(text()); for (const component &c : children_refs_) c.draw(); }
+
+		/* Erase this box and its children from the region cache. */
+		void clear_region_cache() const
+		{ for (const component &c : children_refs_) region_cache_.erase(&c); region_cache_.erase(this); }
 
 		/* Get the region occupied by the given child. */
 		const region &child_region(const component &child) const;
