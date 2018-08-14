@@ -4,7 +4,7 @@ namespace ag
 {
 	float v_box::first_child_y() const
 	{
-		auto content_height{0.0f}, y{this->y() + children().front().get().margin().top};
+		auto content_height{0.0f};
 
 		for (const component &c : children()) {
 			if (c.visible()) {
@@ -13,6 +13,7 @@ namespace ag
 			}
 		}
 
+		const auto y{this->y() + children().front().get().margin().top};
 		switch (align()) {
 			case box::alignment::center:
 			case box::alignment::center_left:

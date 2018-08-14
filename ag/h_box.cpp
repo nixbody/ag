@@ -2,17 +2,17 @@
 
 namespace ag
 {
-	float h_box::child_x(const component &child) const
+	float h_box::first_child_x() const
 	{
-		auto content_width{0.0f}, x{this->x()};
-
+		auto content_width{0.0f};
 		for (const component &c : children()) {
-			const auto cm{c.margin()};
-
-			if (&c == &child) x += content_width + cm.left;
-			if (c.visible()) content_width += c.width() + cm.left + cm.right;
+			if (c.visible()) {
+				const auto cm{c.margin()};
+				content_width += c.width() + cm.left + cm.right;
+			}
 		}
 
+		const auto x{this->x() + children().front().get().margin().left};
 		switch (align()) {
 			case box::alignment::center:
 			case box::alignment::top_center:
@@ -25,6 +25,16 @@ namespace ag
 				return x + width() - content_width - border().thickness - padding().right;
 
 			default: return x + border().thickness + padding().left;
+		}
+	}
+
+	float h_box::child_x(const component &child) const
+	{
+		if (const auto i{child_index(child)}; i > 0) {
+			const component &prev = children()[i - 1], &c = children()[i];
+			return prev.x() + prev.width() + prev.margin().right + c.margin().left;
+		} else {
+			return first_child_x();
 		}
 	}
 }
