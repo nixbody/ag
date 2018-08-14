@@ -93,7 +93,7 @@ SCENARIO("Children sizing", "[box]")
 	GIVEN("a box with children")
 	{
 		ag::box box;
-		box.width = box.height = 10.0f; box.padding = 10.0f;
+		box.x = box.y = 0.0f; box.width = box.height = 10.0f; box.padding = 10.0f;
 		box.add<ag::label>();
 
 		WHEN("the box calculates its children size")
